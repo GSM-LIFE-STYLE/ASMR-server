@@ -1,13 +1,27 @@
-# award score management
+# ASMR 
+
+Award Score Management Run
 
 ### Getting Start
 
-```
+```bash
 $ git clone URL
 
 $ git fetch origin
 
-$ git checkout {branch-name}
+$ git branch {branch_name}
+
+$ git checkout {branch_name}
+```
+
+<br>
+
+### When the master branch changes
+
+```bash
+$ git pull origin master
+
+$ git fetch origin
 ```
 
 <br>
