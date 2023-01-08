@@ -27,7 +27,7 @@ public class EmailSendService {
 
     @Async
     @Transactional(rollbackFor = Exception.class)
-    public void sendEmail(EmailSendRequest emailSentDto){
+    public void execute(EmailSendRequest emailSentDto){
 
         Random random = new Random();
         String authKey = String.valueOf(random.nextInt(8888) + 1111);
@@ -36,7 +36,7 @@ public class EmailSendService {
     }
 
     private void sendAuthEmail(String email, String authKey) {
-        String subject = "go api 인증번호";
+        String subject = "ASMR 인증번호";
         String text = "인증을 위한 인증번호는 <strong>" + authKey + "<strong /> 입니다. <br />";
         EmailAuth emailAuthEntity = emailAuthRepository.findById(email)
                 .orElse(EmailAuth.builder()
