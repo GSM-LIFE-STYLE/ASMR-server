@@ -1,6 +1,6 @@
 package lifestyle.awardscore.global.filter;
 
-import lifestyle.awardscore.global.exception.collection.TokenNotValidException;
+import lifestyle.awardscore.global.security.exception.TokenNotValidException;
 import lifestyle.awardscore.global.security.jwt.TokenProvider;
 import lifestyle.awardscore.global.security.jwt.properties.JwtProperties;
 import lombok.RequiredArgsConstructor;

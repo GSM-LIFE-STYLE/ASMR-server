@@ -2,8 +2,8 @@ package lifestyle.awardscore.global.security.jwt;
 
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
-import lifestyle.awardscore.global.exception.collection.TokenExpirationException;
-import lifestyle.awardscore.global.exception.collection.TokenNotValidException;
+import lifestyle.awardscore.global.security.exception.TokenExpirationException;
+import lifestyle.awardscore.global.security.exception.TokenNotValidException;
 import lifestyle.awardscore.global.security.auth.MemberDetailsService;
 import lifestyle.awardscore.global.security.jwt.properties.JwtProperties;
 import lombok.AllArgsConstructor;
