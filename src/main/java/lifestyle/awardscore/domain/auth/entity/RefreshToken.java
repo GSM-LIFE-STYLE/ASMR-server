@@ -1,4 +1,4 @@
-package lifestyle.awardscore.domain.user.entity;
+package lifestyle.awardscore.domain.auth.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
