@@ -22,7 +22,7 @@ public class MemberSignUpService {
     private final EmailAuthRepository emailAuthRepository;
 
     @Transactional(rollbackFor = Exception.class)
-    public void signUp(MemberSignUpRequest signUpRequest) {
+    public void execute(MemberSignUpRequest signUpRequest) {
         if(memberRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new ExistEmailException("이미 존재하는 이메일입니다.");
         }
