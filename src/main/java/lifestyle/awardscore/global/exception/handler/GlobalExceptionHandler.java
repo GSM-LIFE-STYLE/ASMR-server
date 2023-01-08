@@ -2,6 +2,8 @@ package lifestyle.awardscore.global.exception.handler;
 
 import lifestyle.awardscore.domain.auth.exception.ExistEmailException;
 import lifestyle.awardscore.domain.auth.exception.NotVerifyEmailException;
+import lifestyle.awardscore.domain.email.exception.AuthCodeExpiredException;
+import lifestyle.awardscore.domain.email.exception.ManyRequestEmailAuthException;
 import lifestyle.awardscore.domain.member.exception.MemberNotFoundException;
 import lifestyle.awardscore.global.exception.ErrorMessage;
 import lifestyle.awardscore.global.security.exception.TokenExpirationException;
@@ -48,6 +50,20 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(TokenNotValidException.class)
     public ResponseEntity<ErrorMessage> handleTokenNotValidException(HttpServletRequest request , TokenNotValidException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(AuthCodeExpiredException.class)
+    public ResponseEntity<ErrorMessage> handleAuthCodeExpiredException(HttpServletRequest request , AuthCodeExpiredException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(ManyRequestEmailAuthException.class)
+    public ResponseEntity<ErrorMessage> handleManyRequestEmailAuthException(HttpServletRequest request , ManyRequestEmailAuthException e) {
         printError(request, e, e.getErrorCode().getMessage());
         ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
         return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
