@@ -1,6 +1,9 @@
 package lifestyle.awardscore.domain.auth.presentation;
 
+import lifestyle.awardscore.domain.auth.presentation.dto.request.MemberLoginRequest;
 import lifestyle.awardscore.domain.auth.presentation.dto.request.MemberSignUpRequest;
+import lifestyle.awardscore.domain.auth.presentation.dto.response.TokenResponse;
+import lifestyle.awardscore.domain.auth.service.MemberLoginService;
 import lifestyle.awardscore.domain.auth.service.MemberSignUpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,10 +21,17 @@ import javax.validation.Valid;
 public class AuthController {
 
     private final MemberSignUpService memberSignUpService;
+    private final MemberLoginService memberLoginService;
 
     @PostMapping("/signup")
     public ResponseEntity<Void> signUp(@RequestBody @Valid MemberSignUpRequest signUpRequest) {
         memberSignUpService.signUp(signUpRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<TokenResponse> login(@RequestBody @Valid MemberLoginRequest loginRequest) {
+        TokenResponse data = memberLoginService.login(loginRequest);
+        return new ResponseEntity<>(data, HttpStatus.OK);
     }
 }
