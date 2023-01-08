@@ -1,6 +1,7 @@
 package lifestyle.awardscore.domain.email.service;
 
 import lifestyle.awardscore.domain.email.entity.EmailAuth;
+import lifestyle.awardscore.domain.email.exception.AuthCodeExpiredException;
 import lifestyle.awardscore.domain.email.exception.ManyRequestEmailAuthException;
 import lifestyle.awardscore.domain.email.presentation.dto.request.EmailSendRequest;
 import lifestyle.awardscore.domain.email.repository.EmailAuthRepository;

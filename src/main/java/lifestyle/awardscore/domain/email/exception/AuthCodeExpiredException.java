@@ -4,11 +4,11 @@ import lifestyle.awardscore.global.exception.ErrorCode;
 import lombok.Getter;
 
 @Getter
-public class ManyRequestEmailAuthException extends RuntimeException {
+public class AuthCodeExpiredException extends RuntimeException{
     private final ErrorCode errorCode;
 
-    public ManyRequestEmailAuthException(String message) {
+    public AuthCodeExpiredException(String message) {
         super(message);
-        this.errorCode = ErrorCode.MANY_REQUEST_EMAIL_AUTH;
+        this.errorCode = ErrorCode.EXPIRE_EMAIL_CODE;
     }
 }
