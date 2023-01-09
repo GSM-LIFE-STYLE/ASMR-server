@@ -27,6 +27,13 @@ public class MemberSignUpService {
             throw new ExistEmailException("이미 존재하는 이메일입니다.");
         }
 
+        EmailAuth emailAuth = emailAuthRepository.findById(signUpRequest.getEmail())
+                .orElseThrow(() -> new NotVerifyEmailException("인증되지 않은 이메일입니다."));
+
+        if(!emailAuth.getAuthentication()){
+            throw new NotVerifyEmailException("인증되지 않은 이메일입니다.");
+        }
+
         Member member = Member
                 .builder()
                 .email(signUpRequest.getEmail())
