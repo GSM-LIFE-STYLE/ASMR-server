@@ -2,6 +2,7 @@ package lifestyle.awardscore.domain.email.service;
 
 import lifestyle.awardscore.domain.email.entity.EmailAuth;
 import lifestyle.awardscore.domain.email.exception.MisMatchAuthCodeException;
+import lifestyle.awardscore.domain.email.facade.EmailFacade;
 import lifestyle.awardscore.domain.email.repository.EmailAuthRepository;
 import lifestyle.awardscore.domain.member.exception.MemberNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -15,11 +16,11 @@ import java.util.Objects;
 public class EmailCheckService {
 
     private final EmailAuthRepository emailAuthRepository;
+    private final EmailFacade emailFacade;
 
     @Transactional(rollbackFor = Exception.class)
     public void execute(String email , String authKey) {
-        EmailAuth emailAuthEntity = emailAuthRepository.findById(email)
-                .orElseThrow(()-> new MemberNotFoundException("유저를 찾을 수 없습니다."));
+        EmailAuth emailAuthEntity = emailFacade.getEmailEntityById(email);
         checkAuthKey(emailAuthEntity,authKey);
         emailAuthEntity.updateAuthentication(true);
         emailAuthRepository.save(emailAuthEntity);
