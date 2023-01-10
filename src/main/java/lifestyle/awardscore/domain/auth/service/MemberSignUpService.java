@@ -1,6 +1,7 @@
 package lifestyle.awardscore.domain.auth.service;
 
 import lifestyle.awardscore.domain.email.entity.EmailAuth;
+import lifestyle.awardscore.domain.email.facade.EmailFacade;
 import lifestyle.awardscore.domain.email.repository.EmailAuthRepository;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.member.repository.MemberRepository;
@@ -20,6 +21,7 @@ public class MemberSignUpService {
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
     private final EmailAuthRepository emailAuthRepository;
+    private final EmailFacade emailFacade;
 
     @Transactional(rollbackFor = Exception.class)
     public void execute(MemberSignUpRequest signUpRequest) {

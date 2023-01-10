@@ -26,8 +26,7 @@ public class MemberLoginService {
 
     @Transactional(rollbackFor = Exception.class)
     public TokenResponse login(MemberLoginRequest loginRequest) {
-        Member member = memberRepository.findByEmail(loginRequest.getEmail())
-                .orElseThrow(() -> new MemberNotFoundException("존재하지 않는 회원입니다."));
+        Member member = memberFacade.getMemberByEmail(loginRequest.getEmail());
 
         memberFacade.checkPassword(member, loginRequest.getPassword());
 

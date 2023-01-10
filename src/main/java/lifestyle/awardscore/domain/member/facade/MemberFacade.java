@@ -28,7 +28,12 @@ public class MemberFacade {
         }
     }
 
-    public Long getUserId() {
+    public Member getMemberByEmail(String email) {
+        return memberRepository.findByEmail(email)
+                .orElseThrow(() -> new MemberNotFoundException("멤버를 찾을 수 없습니다."));
+    }
+
+    public Long getMemberId() {
         return getCurrentMember().getMemberId();
     }
 
