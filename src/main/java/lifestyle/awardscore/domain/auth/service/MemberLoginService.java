@@ -18,7 +18,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class MemberLoginService {
 
-    private final MemberRepository memberRepository;
     private final MemberFacade memberFacade;
     private final TokenProvider tokenProvider;
     private final RefreshTokenRepository refreshTokenRepository;

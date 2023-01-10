@@ -15,4 +15,10 @@ public class EmailFacade {
         return emailAuthRepository.findById(email)
                 .orElseThrow(() -> new NotVerifyEmailException("검증되지 않은 이메일입니다."));
     }
+
+    public void checkEmailAuthentication(EmailAuth emailAuth) {
+        if(!emailAuth.getAuthentication()) {
+            throw new NotVerifyEmailException("검증되지 않은 이메일입니다.");
+        }
+    }
 }

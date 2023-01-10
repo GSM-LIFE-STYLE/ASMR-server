@@ -20,7 +20,6 @@ public class MemberSignUpService {
 
     private final PasswordEncoder passwordEncoder;
     private final MemberRepository memberRepository;
-    private final EmailAuthRepository emailAuthRepository;
     private final EmailFacade emailFacade;
 
     @Transactional(rollbackFor = Exception.class)
@@ -29,12 +28,9 @@ public class MemberSignUpService {
             throw new ExistEmailException("이미 존재하는 이메일입니다.");
         }
 
-        EmailAuth emailAuth = emailAuthRepository.findById(signUpRequest.getEmail())
-                .orElseThrow(() -> new NotVerifyEmailException("인증되지 않은 이메일입니다."));
+        EmailAuth emailAuth = emailFacade.getEmailEntityById(signUpRequest.getEmail());
 
-        if(!emailAuth.getAuthentication()){
-            throw new NotVerifyEmailException("인증되지 않은 이메일입니다.");
-        }
+        emailFacade.checkEmailAuthentication(emailAuth);
 
         Member member = Member
                 .builder()
