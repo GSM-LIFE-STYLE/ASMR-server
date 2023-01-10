@@ -17,6 +17,7 @@ public enum ErrorCode {
     ALREADY_EXIST_ID("이미 존재하는 아이디입니다.", 400),
     TOKEN_NOT_VALID("토큰이 유효 하지 않습니다.", 401),
     TOKEN_EXPIRATION("토큰이 만료 되었습니다.", 401),
+    NOT_FOUND_ORDER("존재하지 않는 주문입니다." , 404),
     REFRESH_TOKEN_NOT_FOUND("존재하지 않는 리프레시 토큰입니다.", 404);
 
     private final String message;
