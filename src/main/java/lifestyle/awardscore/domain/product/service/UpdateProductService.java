@@ -16,5 +16,6 @@ public class UpdateProductService {
     @Transactional(rollbackFor = Exception.class)
     public void execute(Long id , UpdateProductRequest request) {
         Product product = productFacade.getProductEntityById(id);
+        product.updateProduct(request.getProductName(), request.getPrice(), request.getDescription());
     }
 }
