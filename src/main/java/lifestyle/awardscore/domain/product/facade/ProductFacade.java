@@ -2,11 +2,13 @@ package lifestyle.awardscore.domain.product.facade;
 
 import lifestyle.awardscore.domain.product.entity.Product;
 import lifestyle.awardscore.domain.product.exception.NotFoundProductException;
+import lifestyle.awardscore.domain.product.presentation.dto.response.AllProductResponse;
 import lifestyle.awardscore.domain.product.repository.ProductRepository;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Component
@@ -26,6 +28,13 @@ public class ProductFacade {
             throw new NotFoundProductException("상품이 존재하지 않습니다.");
         }
         return products;
+    }
+
+    public List<AllProductResponse> productEntityListToDtoList(List<Product> products) {
+        List<AllProductResponse> responses = products.stream()
+                .map(p -> new AllProductResponse(p.getProductId(), p.getProductName(), p.getDescription()))
+                .collect(Collectors.toList());
+        return responses;
     }
 
     public void saveProductEntity(Product product) {
