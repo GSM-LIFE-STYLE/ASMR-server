@@ -2,7 +2,9 @@ package lifestyle.awardscore.domain.product.presentation;
 
 import lifestyle.awardscore.domain.product.presentation.dto.request.RegisterProductRequest;
 import lifestyle.awardscore.domain.product.presentation.dto.response.AllProductResponse;
+import lifestyle.awardscore.domain.product.presentation.dto.response.ProductResponse;
 import lifestyle.awardscore.domain.product.service.GetAllProductService;
+import lifestyle.awardscore.domain.product.service.GetProductService;
 import lifestyle.awardscore.domain.product.service.RegisterProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -19,6 +21,7 @@ public class ProductController {
 
     private final RegisterProductService registerProductService;
     private final GetAllProductService getAllProductService;
+    private final GetProductService getProductService;
 
     @PostMapping
     public ResponseEntity<Void> registerProduct(@Valid @RequestBody RegisterProductRequest request) {
@@ -32,5 +35,9 @@ public class ProductController {
         return ResponseEntity.ok(responses);
     }
 
-
+    @GetMapping("/{id}")
+    public ResponseEntity<ProductResponse> getProduct(@PathVariable Long id) {
+        ProductResponse response = getProductService.execute(id);
+        return ResponseEntity.ok(response);
+    }
 }
