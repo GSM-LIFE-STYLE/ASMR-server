@@ -5,9 +5,10 @@ import lifestyle.awardscore.domain.product.facade.ProductFacade;
 import lifestyle.awardscore.domain.product.presentation.dto.request.UpdateProductRequest;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-@Getter
+@Service
 @RequiredArgsConstructor
 public class UpdateProductService {
 

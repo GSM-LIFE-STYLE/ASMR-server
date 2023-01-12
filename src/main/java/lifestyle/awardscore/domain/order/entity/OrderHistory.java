@@ -21,19 +21,16 @@ public class OrderHistory {
     @Column(name = "order_history_id", nullable = false)
     private Long orderHistoryId;
     
-    @OneToOne(mappedBy = "memberId")
-    @JoinColumn(name = "member_id")
+    @OneToOne(mappedBy = "orderHistory")
     private Member member;
 
-    @OneToOne(mappedBy = "orderId")
-    @JoinColumn(name = "order_id")
+    @OneToOne(mappedBy = "orderHistory")
     private Order order;
 
-    @OneToMany(mappedBy = "productId")
-    @JoinColumn(name = "product_id")
+    @OneToMany(mappedBy = "orderHistory")
     private List<Product> products;
 
-    @Column(name = "orderStatus")
+    @Column(name = "order_status")
     private boolean orderStatus = false;
 
     public void updateStatus() {

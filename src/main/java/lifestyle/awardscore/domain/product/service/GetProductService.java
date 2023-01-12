@@ -5,8 +5,9 @@ import lifestyle.awardscore.domain.product.facade.ProductFacade;
 import lifestyle.awardscore.domain.product.presentation.dto.response.ProductResponse;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Service;
 
-@Getter
+@Service
 @RequiredArgsConstructor
 public class GetProductService {
 

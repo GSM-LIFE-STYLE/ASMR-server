@@ -1,6 +1,7 @@
 package lifestyle.awardscore.domain.shop.entity;
 
 import lifestyle.awardscore.domain.member.entity.Member;
+import lifestyle.awardscore.domain.order.entity.Order;
 import lifestyle.awardscore.domain.product.entity.Product;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -21,11 +22,10 @@ public class Shop {
     @Column(name = "shop_id", nullable = false)
     private Long shopId;
 
-    @OneToOne(mappedBy = "memberId")
-    @JoinColumn(name = "member_id")
+    @OneToOne(mappedBy = "shop")
     private Member member;
 
-    @OneToMany
-    @JoinColumn(name = "product_id")
+    @OneToMany(mappedBy = "shop")
     private List<Product> products;
+
 }
