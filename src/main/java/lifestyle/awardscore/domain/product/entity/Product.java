@@ -1,5 +1,6 @@
 package lifestyle.awardscore.domain.product.entity;
 
+import lifestyle.awardscore.domain.shop.entity.Shop;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,4 +28,9 @@ public class Product {
     @Column(name = "description")
     private String description;
 
+    public void updateProduct(String productName , Long price , String description) {
+        this.productName = productName != null ? productName : this.productName;
+        this.description = description != null ? description : this.description;
+        this.price = price != null ? price : this.price;
+    }
 }

@@ -19,6 +19,7 @@ public enum ErrorCode {
     TOKEN_EXPIRATION("토큰이 만료 되었습니다.", 401),
     NOT_FOUND_ORDER("존재하지 않는 주문입니다." , 404),
     NOT_FOUND_ORDER_HISTORY("존재하지 않는 주문내역입니다.", 404),
+    NOT_FOUND_PRODUCT("존재하지 않는 주문내역입니다.", 404),
     REFRESH_TOKEN_NOT_FOUND("존재하지 않는 리프레시 토큰입니다.", 404);
 
     private final String message;

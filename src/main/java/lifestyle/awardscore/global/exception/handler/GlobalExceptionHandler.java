@@ -8,6 +8,7 @@ import lifestyle.awardscore.domain.email.exception.MisMatchAuthCodeException;
 import lifestyle.awardscore.domain.member.exception.MemberNotFoundException;
 import lifestyle.awardscore.domain.order.exception.NotFoundOrderException;
 import lifestyle.awardscore.domain.order.exception.NotFoundOrderHistoryException;
+import lifestyle.awardscore.domain.product.exception.NotFoundProductException;
 import lifestyle.awardscore.global.exception.ErrorMessage;
 import lifestyle.awardscore.global.security.exception.TokenExpirationException;
 import lifestyle.awardscore.global.security.exception.TokenNotValidException;
@@ -88,6 +89,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundOrderException.class)
     public ResponseEntity<ErrorMessage> handlerNotFoundOrderException(HttpServletRequest request , NotFoundOrderException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(NotFoundProductException.class)
+    public ResponseEntity<ErrorMessage> handlerNotFoundProductException(HttpServletRequest request , NotFoundProductException e) {
         printError(request, e, e.getErrorCode().getMessage());
         ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
         return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
