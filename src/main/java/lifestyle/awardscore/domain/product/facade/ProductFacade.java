@@ -17,4 +17,8 @@ public class ProductFacade {
         return productRepository.findById(id)
                 .orElseThrow(() -> new NotFoundProductException("등록되지 않은 상품입니다."));
     }
+
+    public void saveProductEntity(Product product) {
+        productRepository.save(product);
+    }
 }
