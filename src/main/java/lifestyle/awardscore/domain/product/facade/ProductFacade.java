@@ -6,6 +6,8 @@ import lifestyle.awardscore.domain.product.repository.ProductRepository;
 import lombok.*;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 
 @Component
 @RequiredArgsConstructor
@@ -16,6 +18,14 @@ public class ProductFacade {
     public Product getProductEntityById(Long id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new NotFoundProductException("등록되지 않은 상품입니다."));
+    }
+
+    public List<Product> getAllProductEntity() {
+        List<Product> products = productRepository.findAll();
+        if (products.isEmpty()) {
+            throw new NotFoundProductException("상품이 존재하지 않습니다.");
+        }
+        return products;
     }
 
     public void saveProductEntity(Product product) {
