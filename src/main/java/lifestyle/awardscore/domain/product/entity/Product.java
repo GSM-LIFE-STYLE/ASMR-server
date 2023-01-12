@@ -1,5 +1,6 @@
 package lifestyle.awardscore.domain.product.entity;
 
+import lifestyle.awardscore.domain.shop.entity.Shop;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -27,5 +28,7 @@ public class Product {
     @Column(name = "description")
     private String description;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "shop_id")
+    private Shop shop;
 }

@@ -31,4 +31,6 @@ public class ProductController {
         List<AllProductResponse> responses = getAllProductService.execute();
         return ResponseEntity.ok(responses);
     }
+
+
 }
