@@ -21,15 +21,17 @@ public class Order {
     @Column(name = "order_id", nullable = false)
     private Long orderId;
 
-    @OneToOne(mappedBy = "memberId")
-    @JoinColumn(name = "member_id")
+    @OneToOne(mappedBy = "order")
     private Member member;
 
-    @OneToMany(mappedBy = "productId")
-    @JoinColumn(name = "product_id")
-    private List<Product> orderProducts;
+    @OneToMany(mappedBy = "order")
+    private List<Product> products;
 
     @Column(name = "total_price")
-    private Long total_price;
+    private Long totalPrice;
+
+    @OneToOne
+    @JoinColumn(name = "order_history_id")
+    private OrderHistory orderHistory;
 
 }

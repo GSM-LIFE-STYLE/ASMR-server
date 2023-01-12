@@ -1,5 +1,8 @@
 package lifestyle.awardscore.domain.member.entity;
 
+import lifestyle.awardscore.domain.order.entity.Order;
+import lifestyle.awardscore.domain.order.entity.OrderHistory;
+import lifestyle.awardscore.domain.shop.entity.Shop;
 import lifestyle.awardscore.global.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,5 +37,17 @@ public class Member {
     @Column(name = "role")
     @Enumerated(EnumType.STRING)
     private Role role;
+
+    @OneToOne
+    @JoinColumn(name = "orderHistory")
+    private OrderHistory orderHistory;
+
+    @OneToOne
+    @JoinColumn(name = "order")
+    private Order order;
+
+    @OneToOne
+    @JoinColumn(name = "shop")
+    private Shop shop;
 
 }
