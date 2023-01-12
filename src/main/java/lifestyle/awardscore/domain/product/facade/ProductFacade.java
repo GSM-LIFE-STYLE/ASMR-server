@@ -50,4 +50,8 @@ public class ProductFacade {
     public void saveProductEntity(Product product) {
         productRepository.save(product);
     }
+
+    public void deleteProductEntityById(Long id) {
+        productRepository.deleteById(id);
+    }
 }
