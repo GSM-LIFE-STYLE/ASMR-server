@@ -14,6 +14,10 @@ public class GetAllProductService {
 
     private final ProductFacade productFacade;
 
+    /**
+     * 등록된 모든 상품을 조회하는 서비스
+     * @return products
+     */
     public List<AllProductResponse> execute() {
         List<Product> products = productFacade.getAllProductEntity();
         List<AllProductResponse> responses = productFacade.productEntityListToDtoList(products);

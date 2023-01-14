@@ -13,6 +13,11 @@ public class GetProductService {
 
     private final ProductFacade productFacade;
 
+    /**
+     * 등록된 상품을 상세 조회하는 서비스 , pk를 통해 상품을 상세조회한다.
+     * @param productId
+     * @return response
+     */
     public ProductResponse execute(Long productId) {
         Product product = productFacade.getProductEntityById(productId);
         ProductResponse response = productFacade.productEntityToDto(product);

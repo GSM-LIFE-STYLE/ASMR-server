@@ -11,6 +11,11 @@ public class DeleteProductService {
 
     private final ProductFacade productFacade;
 
+    /**
+     * 등록된 아이템을 삭제하는 서비스, pk 값을 받아 제거를 한다.
+     * @param id
+     */
+
     @Transactional(rollbackFor = Exception.class)
     public void execute(Long id) {
         productFacade.deleteProductEntityById(id);

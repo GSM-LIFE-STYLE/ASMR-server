@@ -14,6 +14,13 @@ public class UpdateProductService {
 
     private final ProductFacade productFacade;
 
+
+    /**
+     * 등록된 상품을 수정하는 서비스, 등록된 상품을 수정한다 null 값으로 인자가 넘어온 필드는
+     * 수정을 하지 않고 원래의 값으로 유지한다.
+     * @param id
+     * @param request
+     */
     @Transactional(rollbackFor = Exception.class)
     public void execute(Long id , UpdateProductRequest request) {
         Product product = productFacade.getProductEntityById(id);
