@@ -1,5 +1,6 @@
 package lifestyle.awardscore.domain.auth.presentation;
 
+import io.swagger.annotations.ApiOperation;
 import lifestyle.awardscore.domain.auth.presentation.dto.request.MemberLoginRequest;
 import lifestyle.awardscore.domain.auth.presentation.dto.request.MemberSignUpRequest;
 import lifestyle.awardscore.domain.auth.presentation.dto.response.TokenResponse;
@@ -24,12 +25,14 @@ public class AuthController {
     private final MemberLoginService memberLoginService;
 
     @PostMapping("/signup")
+    @ApiOperation(value = "회원가입")
     public ResponseEntity<Void> signUp(@RequestBody @Valid MemberSignUpRequest signUpRequest) {
         memberSignUpService.execute(signUpRequest);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/login")
+    @ApiOperation(value = "로그인")
     public ResponseEntity<TokenResponse> login(@RequestBody @Valid MemberLoginRequest loginRequest) {
         TokenResponse data = memberLoginService.login(loginRequest);
         return new ResponseEntity<>(data, HttpStatus.OK);
