@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class RegisterShopRequest {
-    private String shopOwnerName;
-
+    private long itemId;
+    private String shopName;
 }
