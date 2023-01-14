@@ -28,4 +28,6 @@ public class Shop {
     @OneToMany(mappedBy = "shop")
     private List<Product> products;
 
+    @Column(name = "shop_name")
+    private String shopName;
 }
