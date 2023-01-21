@@ -1,4 +1,4 @@
-package lifestyle.awardscore.domain.order;
+package lifestyle.awardscore.domain.item.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,11 +12,17 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PayOrder {
+public class ItemDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
+
+    @Column(name = "content")
+    private String content;
 }

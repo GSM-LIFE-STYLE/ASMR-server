@@ -1,6 +1,6 @@
-package lifestyle.awardscore.domain.item;
+package lifestyle.awardscore.domain.item.entity;
 
-import lifestyle.awardscore.domain.market.Market;
+import lifestyle.awardscore.domain.market.entity.Market;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
