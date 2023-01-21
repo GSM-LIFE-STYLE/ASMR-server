@@ -1,8 +1,6 @@
 package lifestyle.awardscore.domain.order.entity;
 
-
-import lifestyle.awardscore.domain.member.entity.Member;
-import lifestyle.awardscore.domain.order.enum_type.OrderStatus;
+import lifestyle.awardscore.domain.item.entity.Item;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,7 +13,7 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Order {
+public class PayOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -23,10 +21,17 @@ public class Order {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "member_id")
-    private Member host;
+    @JoinColumn(name = "order_id")
+    private Order order;
 
-    @Column(name = "status")
-    @Enumerated(EnumType.STRING)
-    private OrderStatus status;
+    @ManyToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
+
+    @Column(name = "count")
+    private Long count;
+
+    @Column(name = "price")
+    private Long price;
+
 }
