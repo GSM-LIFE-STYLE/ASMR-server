@@ -1,4 +1,4 @@
-package lifestyle.awardscore.global.exception;
+package lifestyle.awardscore.global.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

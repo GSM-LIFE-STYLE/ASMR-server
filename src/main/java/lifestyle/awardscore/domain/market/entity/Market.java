@@ -27,4 +27,7 @@ public class Market {
 
     @OneToMany
     private List<Member> members;
+
+    @Column(name = "market_name")
+    private String marketName;
 }
