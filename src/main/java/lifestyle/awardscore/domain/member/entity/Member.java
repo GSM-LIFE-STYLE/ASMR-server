@@ -1,6 +1,6 @@
 package lifestyle.awardscore.domain.member.entity;
 
-import lifestyle.awardscore.global.role.Role;
+import lifestyle.awardscore.global.filter.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

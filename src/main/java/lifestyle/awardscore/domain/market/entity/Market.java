@@ -1,5 +1,6 @@
 package lifestyle.awardscore.domain.market.entity;
 
+import lifestyle.awardscore.domain.item.entity.Item;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,16 +19,16 @@ public class Market {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "market_id", nullable = false)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "member_id")
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "member_id", nullable = false)
     private Member member;
-
-    @OneToMany
-    private List<Member> members;
 
     @Column(name = "market_name")
     private String marketName;
+
+    @OneToMany(mappedBy = "id")
+    private List<Item> items;
 }
