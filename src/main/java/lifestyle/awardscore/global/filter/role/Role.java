@@ -1,4 +1,4 @@
-package lifestyle.awardscore.global.role;
+package lifestyle.awardscore.global.filter.role;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 

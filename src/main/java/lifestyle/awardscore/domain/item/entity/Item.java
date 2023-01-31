@@ -1,6 +1,7 @@
 package lifestyle.awardscore.domain.item.entity;
 
 import lifestyle.awardscore.domain.market.entity.Market;
+import lifestyle.awardscore.domain.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -15,12 +16,8 @@ public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false)
+    @Column(name = "item_id", nullable = false)
     private Long id;
-
-    @ManyToOne
-    @JoinColumn(name = "market_id")
-    private Market market;
 
     @Column(name = "title")
     private String title;
@@ -28,6 +25,10 @@ public class Item {
     @Column(name = "preview_url")
     private String previewUrl;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "market_id")
+    private Market market;
+
     @Column(name = "is_sold_out")
-    boolean isSoldOud = false;
+    boolean isSoldOut = false;
 }

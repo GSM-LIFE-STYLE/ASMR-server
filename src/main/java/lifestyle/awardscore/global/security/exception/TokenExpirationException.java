@@ -1,6 +1,6 @@
 package lifestyle.awardscore.global.security.exception;
 
-import lifestyle.awardscore.global.exception.ErrorCode;
+import lifestyle.awardscore.global.error.ErrorCode;
 import lombok.Getter;
 
 @Getter

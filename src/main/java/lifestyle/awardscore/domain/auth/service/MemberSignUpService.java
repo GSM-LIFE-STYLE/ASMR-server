@@ -2,13 +2,11 @@ package lifestyle.awardscore.domain.auth.service;
 
 import lifestyle.awardscore.domain.email.entity.EmailAuth;
 import lifestyle.awardscore.domain.email.facade.EmailFacade;
-import lifestyle.awardscore.domain.email.repository.EmailAuthRepository;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.member.repository.MemberRepository;
 import lifestyle.awardscore.domain.auth.exception.ExistEmailException;
-import lifestyle.awardscore.domain.auth.exception.NotVerifyEmailException;
 import lifestyle.awardscore.domain.auth.presentation.dto.request.MemberSignUpRequest;
-import lifestyle.awardscore.global.role.Role;
+import lifestyle.awardscore.global.filter.role.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -24,6 +22,7 @@ public class MemberSignUpService {
 
     @Transactional(rollbackFor = Exception.class)
     public void execute(MemberSignUpRequest signUpRequest) {
+
         if(memberRepository.existsByEmail(signUpRequest.getEmail())) {
             throw new ExistEmailException("이미 존재하는 이메일입니다.");
         }

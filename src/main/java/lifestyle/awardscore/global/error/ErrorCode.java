@@ -1,4 +1,4 @@
-package lifestyle.awardscore.global.exception;
+package lifestyle.awardscore.global.error;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,6 +21,7 @@ public enum ErrorCode {
     NOT_FOUND_ORDER_HISTORY("존재하지 않는 주문내역입니다.", 404),
     NOT_FOUND_PRODUCT("존재하지 않는 주문내역입니다.", 404),
     NOT_FOUND_SHOP("존재하지 않는 상점마켓입니다.", 404),
+    ALREADY_OWNER("이미 마켓을 등록하셨습니다." ,400),
     REFRESH_TOKEN_NOT_FOUND("존재하지 않는 리프레시 토큰입니다.", 404);
 
     private final String message;
