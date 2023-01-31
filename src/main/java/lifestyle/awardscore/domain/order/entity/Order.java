@@ -23,13 +23,6 @@ public class Order {
     @Column(name = "order_id", nullable = false)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id")
-    private Member member;
-
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "pay_order_id")
-    private PayOrder payOrder;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

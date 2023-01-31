@@ -25,9 +25,7 @@ public class Item {
     @Column(name = "preview_url")
     private String previewUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "market_id")
-    private Market market;
+
 
     @Column(name = "is_sold_out")
     boolean isSoldOut = false;

@@ -22,12 +22,6 @@ public class PayOrder {
     @Column(name = "pay_order_id", nullable = false)
     private Long id;
 
-    @OneToMany(mappedBy = "id")
-    private List<Item> item;
-
-    @OneToOne
-    private Member member;
-
     @Column(name = "count")
     private Long count;
 

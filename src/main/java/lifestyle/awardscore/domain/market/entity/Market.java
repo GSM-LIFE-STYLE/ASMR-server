@@ -22,13 +22,10 @@ public class Market {
     @Column(name = "market_id", nullable = false)
     private Long id;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "member_id", nullable = false)
-    private Member member;
+
 
     @Column(name = "market_name")
     private String marketName;
 
-    @OneToMany(mappedBy = "id")
-    private List<Item> items;
+
 }
