@@ -9,11 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
-@Entity
-@Getter
-@Builder
+@Entity @Getter
+@Builder @Table(name = "order")
 @NoArgsConstructor
 @AllArgsConstructor
 public class Order {
@@ -23,6 +21,13 @@ public class Order {
     @Column(name = "order_id", nullable = false)
     private Long id;
 
+    @OneToOne
+    @JoinColumn(name = "member_id")
+    private Member member;
+
+    @OneToOne
+    @JoinColumn(name = "payorder_id")
+    private PayOrder payOrder;
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)

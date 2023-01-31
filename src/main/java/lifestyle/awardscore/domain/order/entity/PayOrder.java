@@ -12,15 +12,19 @@ import java.util.List;
 
 @Entity
 @Getter
-@Builder
+@Builder @Table(name = "payorder")
 @NoArgsConstructor
 @AllArgsConstructor
 public class PayOrder {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "pay_order_id", nullable = false)
+    @Column(name = "payorder_id", nullable = false)
     private Long id;
+
+    @OneToOne
+    @JoinColumn(name = "item_id")
+    private Item item;
 
     @Column(name = "count")
     private Long count;
