@@ -1,5 +1,6 @@
 package lifestyle.awardscore.domain.member.presentation;
 
+import io.swagger.annotations.ApiOperation;
 import lifestyle.awardscore.domain.member.service.WithdrawService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ public class MemberController {
     private final WithdrawService withdrawService;
 
     @DeleteMapping
+    @ApiOperation(value = "회원탈퇴")
     public ResponseEntity<Void> withdraw(@RequestParam String password) {
         withdrawService.execute(password);
         return ResponseEntity.ok().build();
