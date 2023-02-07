@@ -1,6 +1,5 @@
 package lifestyle.awardscore.domain.market.entity;
 
-import lifestyle.awardscore.domain.item.entity.Item;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -8,11 +7,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Getter
-@Builder @Table(name = "market")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Market {
@@ -28,6 +26,4 @@ public class Market {
 
     @Column(name = "market_name")
     private String marketName;
-
-
 }
