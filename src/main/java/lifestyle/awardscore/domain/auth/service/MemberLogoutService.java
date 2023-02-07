@@ -12,6 +12,7 @@ import lifestyle.awardscore.global.security.jwt.TokenProvider;
 import lifestyle.awardscore.global.security.jwt.properties.JwtProperties;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -20,7 +21,6 @@ public class MemberLogoutService {
     private final BlackListRepository blackListRepository;
     private final TokenProvider tokenProvider;
     private final MemberFacade memberFacade;
-    private final JwtProperties jwtProperties;
     private final RefreshTokenRepository refreshTokenRepository;
 
     private void saveBlackList(String email, String accessToken) {
@@ -38,9 +38,10 @@ public class MemberLogoutService {
         blackListRepository.save(blackList);
     }
 
+    @Transactional
     public void logout(String accessToken) {
         Member member = memberFacade.getCurrentMember();
-        String email = tokenProvider.getUserEmail(accessToken, jwtProperties.getAccessSecret());
+        String email = member.getEmail();
         RefreshToken refreshToken = refreshTokenRepository.findById(email)
                 .orElseThrow(() -> new NotFoundRefreshTokenException("존재하지 않는 리프레시 토큰입니다."));
         refreshTokenRepository.delete(refreshToken);

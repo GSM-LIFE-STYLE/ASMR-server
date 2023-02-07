@@ -38,6 +38,7 @@ public class AuthController {
     }
 
     @DeleteMapping
+    @ApiOperation(value = "로그아웃")
     public ResponseEntity<Void> logout(@RequestHeader("Authorization") String accessToken) {
         memberLogoutService.logout(accessToken);
         return ResponseEntity.noContent().build();
