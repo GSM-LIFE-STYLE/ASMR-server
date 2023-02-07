@@ -11,7 +11,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-@Builder @Table(name = "itemdetail")
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemDetail {

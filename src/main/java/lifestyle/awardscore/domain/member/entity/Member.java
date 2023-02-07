@@ -1,5 +1,7 @@
 package lifestyle.awardscore.domain.member.entity;
 
+import lifestyle.awardscore.domain.market.entity.Market;
+import lifestyle.awardscore.domain.order.entity.Orders;
 import lifestyle.awardscore.global.filter.role.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -7,6 +9,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity @Table(name = "member")
 @Getter @Builder
@@ -35,4 +38,10 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+    @OneToOne
+    @JoinColumn(name = "market_id")
+    private Market market;
+
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
+    private List<Orders> orders;
 }

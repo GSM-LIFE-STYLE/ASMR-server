@@ -2,15 +2,14 @@ package lifestyle.awardscore.domain.item.entity;
 
 import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.member.entity.Member;
+import lifestyle.awardscore.domain.order.entity.PayOrder;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.yaml.snakeyaml.error.Mark;
 
 import javax.persistence.*;
 
-@Table(name = "item")
 @Entity @Getter @Builder
 @NoArgsConstructor
 @AllArgsConstructor
@@ -33,4 +32,5 @@ public class Item {
 
     @Column(name = "is_sold_out")
     boolean isSoldOut = false;
+
 }
