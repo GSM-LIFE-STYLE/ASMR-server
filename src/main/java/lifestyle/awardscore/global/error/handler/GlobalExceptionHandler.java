@@ -1,6 +1,7 @@
 package lifestyle.awardscore.global.error.handler;
 
 import lifestyle.awardscore.domain.auth.exception.ExistEmailException;
+import lifestyle.awardscore.domain.auth.exception.NotFoundRefreshTokenException;
 import lifestyle.awardscore.domain.auth.exception.NotVerifyEmailException;
 import lifestyle.awardscore.domain.email.exception.AuthCodeExpiredException;
 import lifestyle.awardscore.domain.email.exception.ManyRequestEmailAuthException;
@@ -72,6 +73,13 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(MisMatchAuthCodeException.class)
     public ResponseEntity<ErrorMessage> handleMisMatchAuthCodeException(HttpServletRequest request , MisMatchAuthCodeException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(NotFoundRefreshTokenException.class)
+    public ResponseEntity<ErrorMessage> handleNotFoundRefreshTokenException(HttpServletRequest request , NotFoundRefreshTokenException e) {
         printError(request, e, e.getErrorCode().getMessage());
         ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
         return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
