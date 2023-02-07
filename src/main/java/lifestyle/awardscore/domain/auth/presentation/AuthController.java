@@ -5,14 +5,12 @@ import lifestyle.awardscore.domain.auth.presentation.dto.request.MemberLoginRequ
 import lifestyle.awardscore.domain.auth.presentation.dto.request.MemberSignUpRequest;
 import lifestyle.awardscore.domain.auth.presentation.dto.response.TokenResponse;
 import lifestyle.awardscore.domain.auth.service.MemberLoginService;
+import lifestyle.awardscore.domain.auth.service.MemberLogoutService;
 import lifestyle.awardscore.domain.auth.service.MemberSignUpService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -23,6 +21,7 @@ public class AuthController {
 
     private final MemberSignUpService memberSignUpService;
     private final MemberLoginService memberLoginService;
+    private final MemberLogoutService memberLogoutService;
 
     @PostMapping("/signup")
     @ApiOperation(value = "회원가입")
@@ -36,5 +35,11 @@ public class AuthController {
     public ResponseEntity<TokenResponse> login(@RequestBody @Valid MemberLoginRequest loginRequest) {
         TokenResponse data = memberLoginService.login(loginRequest);
         return new ResponseEntity<>(data, HttpStatus.OK);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<Void> logout(@RequestHeader("Authorization") String accessToken) {
+        memberLogoutService.logout(accessToken);
+        return ResponseEntity.noContent().build();
     }
 }
