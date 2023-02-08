@@ -1,7 +1,5 @@
 package lifestyle.awardscore.domain.item.entity;
 
-import lifestyle.awardscore.domain.market.entity.Market;
-import lifestyle.awardscore.domain.member.entity.Member;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
