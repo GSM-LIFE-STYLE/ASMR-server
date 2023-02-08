@@ -16,7 +16,7 @@ import javax.persistence.*;
 public class PayOrder {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pay_order_id", nullable = false)
     private Long id;
 

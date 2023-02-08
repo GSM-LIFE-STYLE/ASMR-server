@@ -34,7 +34,7 @@ public class MemberFacade {
     }
 
     public Long getMemberId() {
-        return getCurrentMember().getMemberId();
+        return getCurrentMember().getId();
     }
 
 }

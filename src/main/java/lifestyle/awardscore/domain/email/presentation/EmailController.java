@@ -21,7 +21,7 @@ public class EmailController {
     private final EmailSendService emailSendService;
     private final EmailCheckService emailCheckService;
 
-    @PostMapping(name = "send", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/send", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Void> sendEmail(@Valid @RequestBody EmailSendRequest request) {
         emailSendService.execute(request);
         return ResponseEntity.status(HttpStatus.CREATED).build();
