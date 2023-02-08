@@ -38,10 +38,14 @@ public class Member {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "market_id")
     private Market market;
 
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Orders> orders;
+
+    public void updateMarket(Market market) {
+        this.market = market;
+    }
 }
