@@ -13,7 +13,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/teacher")
+@RequestMapping("/teacher/market")
 public class TeacherMarketController {
 
     private final CreateMarketService createMarketService;

@@ -18,21 +18,21 @@ import java.util.List;
 public class Member {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id", nullable = false)
-    private Long memberId;
+    private Long id;
 
     @Column(name = "email" , nullable = false , length = 40)
     private String email;
 
-    @Column(name = "password" , nullable = false , length = 25)
+    @Column(name = "password" , nullable = false, length = 200)
     private String password;
 
     @Column(name = "student_name" , nullable = false, length = 10)
-    private String studentName;
+    private String name;
 
     @Column(name = "student_number" , nullable = false , unique = true , length = 4)
-    private String studentNumber;
+    private String number;
 
     @Column(name = "role")
     @Enumerated(EnumType.STRING)

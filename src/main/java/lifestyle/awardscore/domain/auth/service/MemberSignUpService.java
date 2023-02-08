@@ -35,8 +35,8 @@ public class MemberSignUpService {
                 .builder()
                 .email(signUpRequest.getEmail())
                 .password(passwordEncoder.encode(signUpRequest.getPassword()))
-                .studentName(signUpRequest.getName())
-                .studentNumber(signUpRequest.getNumber())
+                .name(signUpRequest.getName())
+                .number(signUpRequest.getNumber())
                 .role(Role.from(signUpRequest.getRole()))
                 .build();
 
