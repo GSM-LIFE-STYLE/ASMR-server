@@ -1,4 +1,4 @@
-package lifestyle.awardscore.domain.market.presentation;
+package lifestyle.awardscore.domain.market.presentation.teacher;
 
 import lifestyle.awardscore.domain.market.presentation.dto.request.CreateMarketRequest;
 import lifestyle.awardscore.domain.market.service.CreateMarketService;
@@ -13,8 +13,8 @@ import javax.validation.Valid;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/market")
-public class MarketController {
+@RequestMapping("/teacher")
+public class TeacherMarketController {
 
     private final CreateMarketService createMarketService;
 

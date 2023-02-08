@@ -41,6 +41,11 @@ public class SecurityConfig {
                 .antMatchers("/auth/**").permitAll()
                 .antMatchers("/member/**").authenticated()
 
+                // 권한별 URL 접근
+                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/teacher/**").hasAuthority("TEACHER")
+                .antMatchers("/student/**").hasAuthority("STUDENT")
+
                 .anyRequest().authenticated();
         http
                 .sessionManagement()
