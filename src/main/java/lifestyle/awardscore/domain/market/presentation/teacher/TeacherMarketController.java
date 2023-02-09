@@ -18,7 +18,7 @@ public class TeacherMarketController {
 
     private final CreateMarketService createMarketService;
 
-    @PostMapping
+    @PostMapping("/register")
     public ResponseEntity<Void> createMarket(@Valid @RequestBody CreateMarketRequest request) {
         createMarketService.execute(request);
         return ResponseEntity.ok().build();
