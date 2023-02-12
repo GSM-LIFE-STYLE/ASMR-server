@@ -45,6 +45,10 @@ public class Member {
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY)
     private List<Orders> orders;
 
+    public void updatePassword(String password) {
+        this.password = password;
+    }
+
     public void updateMarket(Market market) {
         this.market = market;
     }
