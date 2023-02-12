@@ -24,6 +24,7 @@ public enum ErrorCode {
     ALREADY_OWNER("이미 마켓을 등록하셨습니다." ,400),
     ALREADY_EXIST_REFRESH_TOKEN("이미 존재하는 리프레시 토큰입니다.", 409),
     REFRESH_TOKEN_NOT_FOUND("존재하지 않는 리프레시 토큰입니다.", 404),
+    NOT_FOUND_ITEM("존재하지 않는 아이템입니다.",404),
     UNQUALIFIED_MARKET_OWNER("상점 주인이 될 자격이 없는 멤버입니다..", 403);
 
     private final String message;

@@ -6,6 +6,7 @@ import lifestyle.awardscore.domain.auth.exception.NotVerifyEmailException;
 import lifestyle.awardscore.domain.email.exception.AuthCodeExpiredException;
 import lifestyle.awardscore.domain.email.exception.ManyRequestEmailAuthException;
 import lifestyle.awardscore.domain.email.exception.MisMatchAuthCodeException;
+import lifestyle.awardscore.domain.item.exception.NotFoundItemException;
 import lifestyle.awardscore.domain.market.exception.UnqualifiedMarketOwnerException;
 import lifestyle.awardscore.domain.member.exception.MemberNotFoundException;
 import lifestyle.awardscore.global.error.ErrorMessage;
@@ -93,6 +94,12 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }
 
+    @ExceptionHandler(NotFoundItemException.class)
+    public ResponseEntity<ErrorMessage> handleNotFoundItemException(HttpServletRequest request , NotFoundItemException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
 
     private void printError(HttpServletRequest request, RuntimeException ex, String message) {
         log.error(request.getRequestURI());
