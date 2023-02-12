@@ -18,12 +18,11 @@ public enum ErrorCode {
     TOKEN_NOT_VALID("토큰이 유효 하지 않습니다.", 401),
     TOKEN_EXPIRATION("토큰이 만료 되었습니다.", 401),
     NOT_FOUND_ORDER("존재하지 않는 주문입니다." , 404),
-    NOT_FOUND_ORDER_HISTORY("존재하지 않는 주문내역입니다.", 404),
-    NOT_FOUND_PRODUCT("존재하지 않는 주문내역입니다.", 404),
-    NOT_FOUND_SHOP("존재하지 않는 상점마켓입니다.", 404),
+    NOT_FOUND_ITEM("존재하지 않는 상점마켓입니다.", 404),
     ALREADY_OWNER("이미 마켓을 등록하셨습니다." ,400),
     ALREADY_EXIST_REFRESH_TOKEN("이미 존재하는 리프레시 토큰입니다.", 409),
     REFRESH_TOKEN_NOT_FOUND("존재하지 않는 리프레시 토큰입니다.", 404),
+    FORBIDDEN_ACCESS_ITEM("아이템 정보에 접근할 수 있는 권한이 없습니다.", 403),
     NOT_FOUND_ITEM("존재하지 않는 아이템입니다.",404),
     UNQUALIFIED_MARKET_OWNER("상점 주인이 될 자격이 없는 멤버입니다..", 403);
 
