@@ -1,7 +1,10 @@
 package lifestyle.awardscore.domain.item.service;
 
+import lifestyle.awardscore.domain.item.entity.Item;
+import lifestyle.awardscore.domain.item.entity.ItemDetail;
 import lifestyle.awardscore.domain.item.exception.ForbiddenAccessItemException;
 import lifestyle.awardscore.domain.item.facade.ItemFacade;
+import lifestyle.awardscore.domain.item.presentation.dto.CreateItemRequest;
 import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.facade.MarketFacade;
 import lifestyle.awardscore.domain.member.entity.Member;
@@ -28,12 +31,24 @@ public class CreateItemService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void execute(Long marketId){
+    public void execute(Long marketId, CreateItemRequest request){
         Member currentMember = memberFacade.getCurrentMember();
         Market findMarket = marketFacade.findMarketEntityById(marketId);
 
         verifyMemberAndMarket(currentMember,findMarket);
 
+        Item item = Item.builder()
+                .title(request.getTitle())
+                .previewUrl(request.getPreviewUrl())
+                .market(findMarket)
+                .isSoldOut(false)
+                .build();
 
+        ItemDetail itemDetail = ItemDetail.builder()
+                .content(request.getContent())
+                .item(item)
+                .build();
+
+        itemFacade.saveItemInfo(item, itemDetail);
     }
 }
