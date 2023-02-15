@@ -4,6 +4,7 @@ import lifestyle.awardscore.domain.auth.exception.PasswordMismatchException;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.member.exception.MemberNotFoundException;
 import lifestyle.awardscore.domain.member.repository.MemberRepository;
+import lifestyle.awardscore.global.filter.role.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -36,5 +37,11 @@ public class MemberFacade {
     public Long getMemberId() {
         return getCurrentMember().getId();
     }
+
+    public boolean verifyMemberIsTeacher(Member member){
+        return member.getRole() == Role.TEACHER;
+    }
+
+
 
 }
