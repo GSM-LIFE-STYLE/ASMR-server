@@ -23,8 +23,8 @@ public class Item {
     @Column(name = "title")
     private String title;
 
-    @Column(name = "preview_url")
-    private String previewUrl;
+    @Column(name = "content")
+    private String content;
 
     @ManyToOne
     @JoinColumn(name = "market_id")

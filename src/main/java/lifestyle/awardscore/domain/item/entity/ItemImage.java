@@ -1,5 +1,6 @@
 package lifestyle.awardscore.domain.item.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,17 +13,18 @@ import javax.persistence.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemDetail {
+public class ItemImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "item_detail_id")
+    @Column(name = "item_image_id")
     private Long id;
 
-    @OneToOne
+    @JsonIgnore
+    @ManyToOne
     @JoinColumn(name = "item_id")
     private Item item;
 
-    @Column(name = "content")
-    private String content;
+    @Column(name = "preview_url")
+    private String previewUrl;
 }

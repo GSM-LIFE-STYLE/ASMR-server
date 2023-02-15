@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 
@@ -26,8 +27,10 @@ public class TeacherMarketController {
     }
 
     @PostMapping("/{marketId}/item")
-    public ResponseEntity<Void> createItem(@PathVariable Long marketId, @Valid @RequestBody CreateItemRequest request){
-        createItemService.execute(marketId, request);
+    public ResponseEntity<Void> createItem(@PathVariable Long marketId,
+                                           @Valid @RequestPart(value = "itemDto") CreateItemRequest request,
+                                           @Valid @RequestPart(value = "files", required = false) MultipartFile multipartFile){
+        createItemService.execute(marketId, request, multipartFile);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

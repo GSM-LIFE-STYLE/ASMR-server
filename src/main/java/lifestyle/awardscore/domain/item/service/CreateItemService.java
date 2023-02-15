@@ -1,7 +1,7 @@
 package lifestyle.awardscore.domain.item.service;
 
 import lifestyle.awardscore.domain.item.entity.Item;
-import lifestyle.awardscore.domain.item.entity.ItemDetail;
+import lifestyle.awardscore.domain.item.entity.ItemImage;
 import lifestyle.awardscore.domain.item.exception.ForbiddenAccessItemException;
 import lifestyle.awardscore.domain.item.facade.ItemFacade;
 import lifestyle.awardscore.domain.item.presentation.dto.CreateItemRequest;
@@ -9,9 +9,11 @@ import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.facade.MarketFacade;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.member.facade.MemberFacade;
+import lifestyle.awardscore.infrastructure.s3.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.multipart.MultipartFile;
 
 @Service
 @RequiredArgsConstructor
@@ -20,6 +22,7 @@ public class CreateItemService {
     private final ItemFacade itemFacade;
     private final MemberFacade memberFacade;
     private final MarketFacade marketFacade;
+    private final S3Service s3Service;
 
     private void verifyMemberAndMarket(Member currentMember, Market market){
         if(!memberFacade.verifyMemberIsTeacher(currentMember))
@@ -30,8 +33,15 @@ public class CreateItemService {
 
     }
 
+    private ItemImage saveToUrl(Item item, String title, String uploadFileUrl) {
+        return ItemImage.builder()
+                .item(item)
+                .previewUrl("https://awardscore.s3.ap-northeast-2.amazonaws.com/MARKET/"+ title + "/" + uploadFileUrl)
+                .build();
+    }
+
     @Transactional(rollbackFor = Exception.class)
-    public void execute(Long marketId, CreateItemRequest request){
+    public void execute(Long marketId, CreateItemRequest request, MultipartFile multipartFile){
         Member currentMember = memberFacade.getCurrentMember();
         Market findMarket = marketFacade.findMarketEntityById(marketId);
 
@@ -39,16 +49,12 @@ public class CreateItemService {
 
         Item item = Item.builder()
                 .title(request.getTitle())
-                .previewUrl(request.getPreviewUrl())
+                .content(request.getContent())
                 .market(findMarket)
                 .isSoldOut(false)
                 .build();
 
-        ItemDetail itemDetail = ItemDetail.builder()
-                .content(request.getContent())
-                .item(item)
-                .build();
-
-        itemFacade.saveItemInfo(item, itemDetail);
+        String uploadFileUrl = s3Service.uploadFile(multipartFile, "ITEM/" + item.getTitle() + "/USER/" + currentMember.getId() +"/");
+        itemFacade.saveItemInfo(item, saveToUrl(item, item.getTitle(), uploadFileUrl));
     }
 }
