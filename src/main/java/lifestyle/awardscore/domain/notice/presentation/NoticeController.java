@@ -6,10 +6,7 @@ import lifestyle.awardscore.domain.notice.service.WriteNoticeService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -25,6 +22,12 @@ public class NoticeController {
     public ResponseEntity<Void> WriteNotice(@RequestBody @Valid WriteNoticeRequest request) {
         writeNoticeService.execute(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
+    }
+
+    @GetMapping
+    public ResponseEntity<Void> ViewNotice() {
+        viewNoticeService.execute();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
 }
