@@ -27,8 +27,9 @@ public class NoticeController {
     }
 
     @GetMapping
-    public List<Notice> ViewNotice() {
-        return viewNoticeService.execute();
+    public ResponseEntity<List<Notice>> ViewNotice() {
+        viewNoticeService.execute();
+        return ResponseEntity.ok().build();
     }
 
 }
