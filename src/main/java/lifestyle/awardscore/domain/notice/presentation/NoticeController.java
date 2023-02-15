@@ -1,5 +1,6 @@
 package lifestyle.awardscore.domain.notice.presentation;
 
+import lifestyle.awardscore.domain.notice.entity.Notice;
 import lifestyle.awardscore.domain.notice.presentation.dto.request.WriteNoticeRequest;
 import lifestyle.awardscore.domain.notice.service.ViewNoticeService;
 import lifestyle.awardscore.domain.notice.service.WriteNoticeService;
@@ -9,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -25,9 +27,8 @@ public class NoticeController {
     }
 
     @GetMapping
-    public ResponseEntity<Void> ViewNotice() {
-        viewNoticeService.execute();
-        return new ResponseEntity<>(HttpStatus.OK);
+    public List<Notice> ViewNotice() {
+        return viewNoticeService.execute();
     }
 
 }
