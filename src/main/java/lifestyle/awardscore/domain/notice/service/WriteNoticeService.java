@@ -3,8 +3,10 @@ package lifestyle.awardscore.domain.notice.service;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.member.facade.MemberFacade;
 import lifestyle.awardscore.domain.notice.entity.Notice;
+import lifestyle.awardscore.domain.notice.exception.UnqualifiedNoticeWriterException;
 import lifestyle.awardscore.domain.notice.presentation.dto.request.WriteNoticeRequest;
 import lifestyle.awardscore.domain.notice.repository.NoticeRepository;
+import lifestyle.awardscore.global.filter.role.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +23,7 @@ public class WriteNoticeService {
     public void execute(WriteNoticeRequest request) {
 
         Member currentMember = memberFacade.getCurrentMember();
+        verifyMember(currentMember);
 
         Notice notice = Notice.builder()
                 .title(request.getTitle())
@@ -28,5 +31,11 @@ public class WriteNoticeService {
                 .member(currentMember).build();
 
         noticeRepository.save(notice);
+    }
+
+    public void verifyMember(Member member) {
+        if (member.getRole() != Role.ADMIN || member.getRole() != Role.TEACHER) {
+            throw new UnqualifiedNoticeWriterException("공지글을 작성할 권한이 없습니다.");
+        }
     }
 }
