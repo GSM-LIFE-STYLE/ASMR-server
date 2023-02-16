@@ -21,13 +21,13 @@ public class AdminNoticeController {
     public final ViewNoticeService viewNoticeService;
 
     @PostMapping("/write")
-    public ResponseEntity<Void> WriteNotice(@RequestBody @Valid WriteNoticeRequest request) {
+    public ResponseEntity<Void> writeNotice(@RequestBody @Valid WriteNoticeRequest request) {
         writeNoticeService.execute(request);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping
-    public ResponseEntity<List<Notice>> ViewNotice() {
+    public ResponseEntity<List<Notice>> viewNotice() {
         viewNoticeService.execute();
         return ResponseEntity.ok().build();
     }

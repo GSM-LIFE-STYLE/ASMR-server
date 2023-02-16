@@ -16,7 +16,7 @@ public class StudentNoticeController {
     public final ViewNoticeService viewNoticeService;
 
     @GetMapping
-    public ResponseEntity<List<Notice>> ViewNotice() {
+    public ResponseEntity<List<Notice>> viewNotice() {
         viewNoticeService.execute();
         return ResponseEntity.ok().build();
     }
