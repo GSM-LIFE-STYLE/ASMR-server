@@ -19,6 +19,12 @@ public class WriteNoticeService {
     private final MemberFacade memberFacade;
 
 
+    private void verifyMember(Member member) {
+        if (member.getRole() != Role.ADMIN || member.getRole() != Role.TEACHER) {
+            throw new UnqualifiedNoticeWriterException("공지글을 작성할 권한이 없습니다.");
+        }
+    }
+
     @Transactional
     public void execute(WriteNoticeRequest request) {
 
@@ -31,11 +37,5 @@ public class WriteNoticeService {
                 .member(currentMember).build();
 
         noticeRepository.save(notice);
-    }
-
-    public void verifyMember(Member member) {
-        if (member.getRole() != Role.ADMIN || member.getRole() != Role.TEACHER) {
-            throw new UnqualifiedNoticeWriterException("공지글을 작성할 권한이 없습니다.");
-        }
     }
 }
