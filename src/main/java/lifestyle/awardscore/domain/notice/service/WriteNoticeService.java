@@ -20,7 +20,7 @@ public class WriteNoticeService {
 
 
     private void verifyMember(Member member) {
-        if (member.getRole() != Role.ADMIN || member.getRole() != Role.TEACHER) {
+        if (member.getRole() == Role.STUDENT) {
             throw new UnqualifiedNoticeWriterException("공지글을 작성할 권한이 없습니다.");
         }
     }
@@ -34,7 +34,8 @@ public class WriteNoticeService {
         Notice notice = Notice.builder()
                 .title(request.getTitle())
                 .content(request.getContent())
-                .member(currentMember).build();
+                .member(currentMember)
+                .build();
 
         noticeRepository.save(notice);
     }
