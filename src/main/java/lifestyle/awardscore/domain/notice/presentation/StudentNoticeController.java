@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/student/**")
+@RequestMapping("/student")
 public class StudentNoticeController {
 
     public final ViewNoticeService viewNoticeService;
