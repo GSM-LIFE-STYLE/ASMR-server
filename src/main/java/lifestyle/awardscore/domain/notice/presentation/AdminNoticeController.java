@@ -14,7 +14,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/admin/notice")
+@RequestMapping("/admin/**")
 public class AdminNoticeController {
 
     private final WriteNoticeService writeNoticeService;
