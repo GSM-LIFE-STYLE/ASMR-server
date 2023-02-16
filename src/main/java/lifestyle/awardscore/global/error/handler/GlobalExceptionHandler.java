@@ -11,6 +11,8 @@ import lifestyle.awardscore.domain.item.exception.NotFoundItemException;
 import lifestyle.awardscore.domain.market.exception.NotFoundMarketException;
 import lifestyle.awardscore.domain.market.exception.UnqualifiedMarketOwnerException;
 import lifestyle.awardscore.domain.member.exception.MemberNotFoundException;
+import lifestyle.awardscore.domain.notice.exception.NotFoundNoticeException;
+import lifestyle.awardscore.domain.notice.exception.UnqualifiedNoticeWriterException;
 import lifestyle.awardscore.global.error.ErrorMessage;
 import lifestyle.awardscore.global.security.exception.TokenExpirationException;
 import lifestyle.awardscore.global.security.exception.TokenNotValidException;
@@ -112,6 +114,20 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(NotFoundMarketException.class)
     public ResponseEntity<ErrorMessage> handleNotFoundMarketException(HttpServletRequest request , NotFoundMarketException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(UnqualifiedNoticeWriterException.class)
+    public ResponseEntity<ErrorMessage> handleUnqualifiedNoticeWriterException(HttpServletRequest request , UnqualifiedNoticeWriterException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(NotFoundNoticeException.class)
+    public ResponseEntity<ErrorMessage> handleNotFoundNoticeException(HttpServletRequest request , NotFoundNoticeException e) {
         printError(request, e, e.getErrorCode().getMessage());
         ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
         return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
