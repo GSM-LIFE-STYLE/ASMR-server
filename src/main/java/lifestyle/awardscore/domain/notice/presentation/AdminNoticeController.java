@@ -2,6 +2,7 @@ package lifestyle.awardscore.domain.notice.presentation;
 
 import lifestyle.awardscore.domain.notice.entity.Notice;
 import lifestyle.awardscore.domain.notice.presentation.dto.request.WriteNoticeRequest;
+import lifestyle.awardscore.domain.notice.presentation.dto.response.ViewNoticeResponse;
 import lifestyle.awardscore.domain.notice.service.ViewNoticeService;
 import lifestyle.awardscore.domain.notice.service.WriteNoticeService;
 import lombok.RequiredArgsConstructor;
@@ -27,9 +28,9 @@ public class AdminNoticeController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Notice>> viewNotice() {
-        viewNoticeService.execute();
-        return ResponseEntity.ok().build();
+    public ResponseEntity<List<ViewNoticeResponse>> viewNotice() {
+        List<ViewNoticeResponse> response = viewNoticeService.execute();
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }
