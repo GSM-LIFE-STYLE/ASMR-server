@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 @RequiredArgsConstructor
@@ -18,10 +19,10 @@ public class ViewNoticeService {
 
     public List<ViewNoticeResponse> execute() {
         List<Notice> noticeList = noticeRepository.findAll();
-        List<ViewNoticeResponse> response = noticeList.stream()
-                .map(n -> new ViewNoticeResponse(n.getNoticeId(), n.getTitle(), n.getContent()))
+        return noticeList.stream()
+                .map(n -> ViewNoticeResponse.builder()
+                        .id(n.getNoticeId()).title(n.getTitle()).content(n.getContent()).build())
                 .collect(Collectors.toList());
-        return response;
     }
 
 }
