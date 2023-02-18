@@ -6,6 +6,7 @@ import lifestyle.awardscore.domain.notice.repository.NoticeRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,7 +19,7 @@ public class ViewNoticeService {
     public List<ViewNoticeResponse> execute() {
         List<Notice> noticeList = noticeRepository.findAll();
         List<ViewNoticeResponse> response = noticeList.stream()
-                .map(n -> new ViewNoticeResponse(n.getTitle(), n.getContent()))
+                .map(n -> new ViewNoticeResponse(n.getNoticeId(), n.getTitle(), n.getContent()))
                 .collect(Collectors.toList());
         return response;
     }

@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ViewNoticeResponse {
 
+    private Long id;
     private String title;
     private String content;
 }
