@@ -1,5 +1,6 @@
 package lifestyle.awardscore.domain.market.service;
 
+import lifestyle.awardscore.domain.item.facade.ItemFacade;
 import lifestyle.awardscore.domain.market.facade.MarketFacade;
 import lifestyle.awardscore.domain.market.presentation.dto.response.MarketResponse;
 import lombok.RequiredArgsConstructor;

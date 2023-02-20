@@ -8,5 +8,5 @@ import lombok.RequiredArgsConstructor;
 public class ItemResponse {
     private final Long itemId;
     private final String title;
-    private final String price;
+    private final Integer price;
 }
