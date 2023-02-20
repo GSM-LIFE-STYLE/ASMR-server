@@ -26,7 +26,7 @@ public class ItemFacade {
                 .orElseThrow(() -> new NotFoundItemException("아이템이 존재하지 않습니다."));
     }
 
-    public ItemImage findItemDetailEntityById(Long id){
+    public ItemImage findItemImageEntityByItemId(Long id){
         return itemImageRepository.findById(id)
                 .orElseThrow(() -> new NotFoundItemException("아이템이 존재하지 않습니다."));
     }
@@ -50,6 +50,7 @@ public class ItemFacade {
                 .itemId(i.getId())
                 .title(i.getTitle())
                 .price(i.getPrice())
+                .previewUrl(findItemImageEntityByItemId(i.getId()).getPreviewUrl())
                 .build()).collect(Collectors.toList());
     }
 }

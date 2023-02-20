@@ -9,4 +9,5 @@ public class ItemResponse {
     private final Long itemId;
     private final String title;
     private final Integer price;
+    private final String previewUrl;
 }
