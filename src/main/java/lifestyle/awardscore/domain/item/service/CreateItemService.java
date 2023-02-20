@@ -4,7 +4,7 @@ import lifestyle.awardscore.domain.item.entity.Item;
 import lifestyle.awardscore.domain.item.entity.ItemImage;
 import lifestyle.awardscore.domain.item.exception.ForbiddenAccessItemException;
 import lifestyle.awardscore.domain.item.facade.ItemFacade;
-import lifestyle.awardscore.domain.item.presentation.dto.CreateItemRequest;
+import lifestyle.awardscore.domain.item.presentation.dto.request.CreateItemRequest;
 import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.facade.MarketFacade;
 import lifestyle.awardscore.domain.member.entity.Member;
@@ -51,6 +51,7 @@ public class CreateItemService {
                 .title(request.getTitle())
                 .content(request.getContent())
                 .market(findMarket)
+                .price(request.getPrice())
                 .isSoldOut(false)
                 .build();
 
