@@ -26,6 +26,9 @@ public class Item {
     @Column(name = "content")
     private String content;
 
+    @Column(name = "price")
+    private Integer price;
+
     @ManyToOne
     @JoinColumn(name = "market_id")
     private Market market;

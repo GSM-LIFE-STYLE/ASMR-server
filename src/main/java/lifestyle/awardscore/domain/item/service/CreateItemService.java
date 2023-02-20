@@ -51,6 +51,7 @@ public class CreateItemService {
                 .title(request.getTitle())
                 .content(request.getContent())
                 .market(findMarket)
+                .price(request.getPrice())
                 .isSoldOut(false)
                 .build();
 
