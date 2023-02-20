@@ -1,6 +1,6 @@
 package lifestyle.awardscore.domain.market.presentation.teacher;
 
-import lifestyle.awardscore.domain.item.presentation.dto.CreateItemRequest;
+import lifestyle.awardscore.domain.item.presentation.dto.request.CreateItemRequest;
 import lifestyle.awardscore.domain.item.service.CreateItemService;
 import lifestyle.awardscore.domain.market.presentation.dto.request.CreateMarketRequest;
 import lifestyle.awardscore.domain.market.presentation.dto.response.MarketResponse;

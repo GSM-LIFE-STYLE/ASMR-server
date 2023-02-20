@@ -1,4 +1,4 @@
-package lifestyle.awardscore.domain.item.presentation.dto;
+package lifestyle.awardscore.domain.item.presentation.dto.request;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
