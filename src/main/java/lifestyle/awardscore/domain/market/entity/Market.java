@@ -30,4 +30,8 @@ public class Market {
 
     @Column(name = "market_name")
     private String marketName;
+
+    public void updateMarketName(String marketName){
+        this.marketName = marketName;
+    }
 }
