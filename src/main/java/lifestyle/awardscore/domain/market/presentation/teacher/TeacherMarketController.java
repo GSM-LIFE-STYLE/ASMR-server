@@ -8,6 +8,7 @@ import lifestyle.awardscore.domain.market.presentation.dto.response.MarketRespon
 import lifestyle.awardscore.domain.market.service.CreateMarketService;
 import lifestyle.awardscore.domain.market.service.LookUpAllMarketService;
 import lifestyle.awardscore.domain.market.service.LookUpMarketService;
+import lifestyle.awardscore.domain.market.service.UpdateMarketNameService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +27,7 @@ public class TeacherMarketController {
     private final CreateItemService createItemService;
     private final LookUpAllMarketService lookUpAllMarketService;
     private final LookUpMarketService lookUpMarketService;
+    private final UpdateMarketNameService updateMarketNameService;
 
     @PostMapping("/register")
     public ResponseEntity<Void> createMarket(@Valid @RequestBody CreateMarketRequest request) {
@@ -47,9 +49,15 @@ public class TeacherMarketController {
         return ResponseEntity.ok(responses);
     }
 
-    @GetMapping("{marketId}")
+    @GetMapping("/{marketId}")
     public ResponseEntity<List<ItemResponse>> lookUpMarket(@PathVariable Long marketId){
         List<ItemResponse> responses = lookUpMarketService.execute(marketId);
         return ResponseEntity.ok(responses);
+    }
+
+    @PatchMapping("/{marketId}")
+    public ResponseEntity<Void> updateMarket(@PathVariable Long marketId, @RequestParam String newMarketName) {
+        updateMarketNameService.execute(marketId, newMarketName);
+        return ResponseEntity.noContent().build();
     }
 }
