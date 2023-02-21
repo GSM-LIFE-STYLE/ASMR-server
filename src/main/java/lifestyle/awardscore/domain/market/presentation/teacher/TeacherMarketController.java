@@ -5,10 +5,7 @@ import lifestyle.awardscore.domain.item.presentation.dto.response.ItemResponse;
 import lifestyle.awardscore.domain.item.service.CreateItemService;
 import lifestyle.awardscore.domain.market.presentation.dto.request.CreateMarketRequest;
 import lifestyle.awardscore.domain.market.presentation.dto.response.MarketResponse;
-import lifestyle.awardscore.domain.market.service.CreateMarketService;
-import lifestyle.awardscore.domain.market.service.LookUpAllMarketService;
-import lifestyle.awardscore.domain.market.service.LookUpMarketService;
-import lifestyle.awardscore.domain.market.service.UpdateMarketNameService;
+import lifestyle.awardscore.domain.market.service.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +25,7 @@ public class TeacherMarketController {
     private final LookUpAllMarketService lookUpAllMarketService;
     private final LookUpMarketService lookUpMarketService;
     private final UpdateMarketNameService updateMarketNameService;
+    private final DeleteMarketService deleteMarketService;
 
     @PostMapping("/register")
     public ResponseEntity<Void> createMarket(@Valid @RequestBody CreateMarketRequest request) {
@@ -59,5 +57,11 @@ public class TeacherMarketController {
     public ResponseEntity<Void> updateMarket(@PathVariable Long marketId, @RequestParam String newMarketName) {
         updateMarketNameService.execute(marketId, newMarketName);
         return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{marketId}")
+    public ResponseEntity<Void> deleteMarket(@PathVariable Long marketId){
+        deleteMarketService.execute(marketId);
+        return ResponseEntity.ok().build();
     }
 }
