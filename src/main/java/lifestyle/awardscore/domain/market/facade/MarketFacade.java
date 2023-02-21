@@ -29,6 +29,11 @@ public class MarketFacade {
                 .orElseThrow(() -> new NotFoundMarketException("존재하지 않는 마켓입니다."));
     }
 
+
+    public void deleteMarket(Market market){
+        marketRepository.delete(market);
+    }
+
     public List<Market> findAllMarkets(){
         return marketRepository.findAll();
     }
