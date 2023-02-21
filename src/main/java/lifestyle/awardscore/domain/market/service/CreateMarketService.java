@@ -28,7 +28,7 @@ public class CreateMarketService {
     }
 
     @Transactional
-    public void execute(CreateMarketRequest request){
+    public Long execute(CreateMarketRequest request){
         Member currentMember = memberFacade.getCurrentMember();
 
         verifyMarketOwner(currentMember);
@@ -39,5 +39,8 @@ public class CreateMarketService {
                 .build());
 
         currentMember.updateMarket(market);
+
+        return market.getId();
+
     }
 }

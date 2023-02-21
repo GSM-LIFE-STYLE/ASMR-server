@@ -41,7 +41,7 @@ public class CreateItemService {
     }
 
     @Transactional(rollbackFor = Exception.class)
-    public void execute(Long marketId, CreateItemRequest request, MultipartFile multipartFile){
+    public Long execute(Long marketId, CreateItemRequest request, MultipartFile multipartFile){
         Member currentMember = memberFacade.getCurrentMember();
         Market findMarket = marketFacade.findMarketEntityById(marketId);
 
@@ -57,5 +57,7 @@ public class CreateItemService {
 
         String uploadFileUrl = s3Service.uploadFile(multipartFile, "ITEM/" + item.getTitle() + "/USER/" + currentMember.getId() +"/");
         itemFacade.saveItemInfo(item, saveToUrl(item, item.getTitle(), uploadFileUrl));
+
+        return item.getId();
     }
 }
