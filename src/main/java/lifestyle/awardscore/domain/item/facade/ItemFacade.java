@@ -53,4 +53,8 @@ public class ItemFacade {
                 .previewUrl(findItemImageEntityByItemId(i.getId()).getPreviewUrl())
                 .build()).collect(Collectors.toList());
     }
+
+    public void deleteAllItems(List<Item> items){
+        itemRepository.deleteAll(items);
+    }
 }
