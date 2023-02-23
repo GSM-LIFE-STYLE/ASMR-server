@@ -3,11 +3,14 @@ package lifestyle.awardscore.global.error.handler;
 import lifestyle.awardscore.domain.auth.exception.ExistEmailException;
 import lifestyle.awardscore.domain.auth.exception.NotFoundRefreshTokenException;
 import lifestyle.awardscore.domain.auth.exception.NotVerifyEmailException;
+import lifestyle.awardscore.domain.consumer.exception.NotFoundConsumerException;
+import lifestyle.awardscore.domain.consumer.exception.UnqualifiedMarketMemberException;
 import lifestyle.awardscore.domain.email.exception.AuthCodeExpiredException;
 import lifestyle.awardscore.domain.email.exception.ManyRequestEmailAuthException;
 import lifestyle.awardscore.domain.email.exception.MisMatchAuthCodeException;
 import lifestyle.awardscore.domain.item.exception.ForbiddenAccessItemException;
 import lifestyle.awardscore.domain.item.exception.NotFoundItemException;
+import lifestyle.awardscore.domain.market.exception.AlreadyRegisterMarketException;
 import lifestyle.awardscore.domain.market.exception.NotFoundMarketException;
 import lifestyle.awardscore.domain.market.exception.UnqualifiedMarketOwnerException;
 import lifestyle.awardscore.domain.member.exception.MemberNotFoundException;
@@ -132,6 +135,28 @@ public class GlobalExceptionHandler {
         ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
         return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
     }
+
+    @ExceptionHandler(NotFoundConsumerException.class)
+    public ResponseEntity<ErrorMessage> handleNotFoundConsumerException(HttpServletRequest request , NotFoundConsumerException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(UnqualifiedMarketMemberException.class)
+    public ResponseEntity<ErrorMessage> handleUnqualifiedMarketMemberException(HttpServletRequest request , UnqualifiedMarketMemberException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
+    @ExceptionHandler(AlreadyRegisterMarketException.class)
+    public ResponseEntity<ErrorMessage> handleAlreadyRegisterMarketException(HttpServletRequest request , AlreadyRegisterMarketException e) {
+        printError(request, e, e.getErrorCode().getMessage());
+        ErrorMessage errorMessage = new ErrorMessage(e.getErrorCode().getMessage(), e.getErrorCode().getStatus());
+        return new ResponseEntity<>(errorMessage, HttpStatus.valueOf(e.getErrorCode().getStatus()));
+    }
+
 
     private void printError(HttpServletRequest request, RuntimeException ex, String message) {
         log.error(request.getRequestURI());
