@@ -22,9 +22,6 @@ public class RegisterMarketService {
 
         memberFacade.verifyMemberQualification(member);
         memberFacade.verifyMemberAlreadyRegisteredMarket(member);
-
-        member.updateMarket(market);
-
         return market.getId();
     }
 
