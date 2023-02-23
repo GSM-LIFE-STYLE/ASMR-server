@@ -1,6 +1,7 @@
 package lifestyle.awardscore.domain.market.service;
 
 import lifestyle.awardscore.domain.market.entity.Market;
+import lifestyle.awardscore.domain.market.exception.UnqualifiedMarketMemberException;
 import lifestyle.awardscore.domain.market.facade.MarketFacade;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.member.facade.MemberFacade;
@@ -18,10 +19,7 @@ public class SignUpMarketService {
     @Transactional(rollbackFor = Exception.class)
     public void execute(Long marketId){
         Member currentMember = memberFacade.getCurrentMember();
-        if (memberFacade.verifyMemberIsTeacher(currentMember))
-            throw new Member
-
-
+        memberFacade.verifyMemberQualification(currentMember);
         Market market = marketFacade.findMarketEntityById(marketId);
         market.addMember(currentMember);
     }
