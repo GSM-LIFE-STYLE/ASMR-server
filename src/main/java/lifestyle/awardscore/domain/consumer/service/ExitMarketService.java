@@ -12,25 +12,20 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class RegisterMarketService {
-
-    private final MemberFacade memberFacade;
+public class ExitMarketService {
     private final MarketFacade marketFacade;
+    private final MemberFacade memberFacade;
     private final ConsumerFacade consumerFacade;
 
     @Transactional(rollbackFor = Exception.class)
-    public Long execute(Long marketId){
-        Member member = memberFacade.getCurrentMember();
+    public void execute(Long marketId){
+        Member currentMember = memberFacade.getCurrentMember();
         Market market = marketFacade.findMarketEntityById(marketId);
+        Consumer consumer = consumerFacade.findByMember(currentMember);
 
-        memberFacade.verifyMemberQualification(member);
-        memberFacade.verifyMemberAlreadyRegisteredMarket(member);
-        Consumer consumer = consumerFacade.saveConsumer(Consumer.builder()
-                .member(member)
-                .market(market)
-                .build());
+        memberFacade.verifyMemberQualification(currentMember);
+        consumerFacade.verifyMarketConsumer(consumer, market);
 
-        return consumer.getId();
+        consumerFacade.deleteByMarketAndMember(currentMember, market);
     }
-
 }

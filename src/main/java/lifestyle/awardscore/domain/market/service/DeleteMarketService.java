@@ -1,5 +1,6 @@
 package lifestyle.awardscore.domain.market.service;
 
+import lifestyle.awardscore.domain.consumer.facade.ConsumerFacade;
 import lifestyle.awardscore.domain.item.entity.Item;
 import lifestyle.awardscore.domain.item.facade.ItemFacade;
 import lifestyle.awardscore.domain.market.entity.Market;
@@ -19,6 +20,7 @@ public class DeleteMarketService {
     private final MarketFacade marketFacade;
     private final MemberFacade memberFacade;
     private final ItemFacade itemFacade;
+    private final ConsumerFacade consumerFacade;
 
     @Transactional(rollbackFor = Exception.class)
     public void execute(Long marketId){
@@ -27,6 +29,7 @@ public class DeleteMarketService {
         List<Item> items = itemFacade.findAllItemByMarket(market);
 
         marketFacade.verifyMemberIsMarketOwner(currentMember);
+        consumerFacade.deleteAllByMarket(market);
         marketFacade.deleteMarket(market);
         itemFacade.deleteAllItems(items);
     }

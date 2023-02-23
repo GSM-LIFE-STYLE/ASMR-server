@@ -53,4 +53,8 @@ public class MarketFacade {
     public List<MarketResponse> marketToDtoList(List<Market> markets){
         return markets.stream().map(m -> marketToDto(m)).collect(Collectors.toList());
     }
+
+    public Market saveMarket(Market market){
+        return marketRepository.save(market);
+    }
 }

@@ -1,8 +1,11 @@
 package lifestyle.awardscore.domain.market.service;
 
+import lifestyle.awardscore.domain.consumer.entity.Consumer;
+import lifestyle.awardscore.domain.consumer.facade.ConsumerFacade;
 import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.exception.AlreadyMarketOwnerException;
 import lifestyle.awardscore.domain.market.exception.UnqualifiedMarketOwnerException;
+import lifestyle.awardscore.domain.market.facade.MarketFacade;
 import lifestyle.awardscore.domain.market.presentation.dto.request.CreateMarketRequest;
 import lifestyle.awardscore.domain.market.repository.MarketRepository;
 import lifestyle.awardscore.domain.member.entity.Member;
@@ -16,31 +19,27 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class CreateMarketService {
     private final MemberFacade memberFacade;
-    private final MarketRepository marketRepository;
+    private final MarketFacade marketFacade;
+    private final ConsumerFacade consumerFacade;
 
-    private void verifyMarketOwner(Member member) {
-        if(marketRepository.existsByMember(member))
-            throw new AlreadyMarketOwnerException("이미 마켓을 등록한 멤버입니다.");
-
-        if(member.getRole() != Role.TEACHER) {
-            throw new UnqualifiedMarketOwnerException("상점 주인이 될 자격이 없는 멤버입니다.");
-        }
-    }
 
     @Transactional
     public Long execute(CreateMarketRequest request){
         Member currentMember = memberFacade.getCurrentMember();
 
-        verifyMarketOwner(currentMember);
+        consumerFacade.existsByMember(currentMember);
+        memberFacade.verifyTeacher(currentMember);
 
-        Market market = marketRepository.save(Market.builder()
+        Market market = marketFacade.saveMarket(Market.builder()
                 .member(currentMember)
                 .marketName(request.getMarketName())
                 .build());
 
-        currentMember.updateMarket(market);
+        consumerFacade.saveConsumer(Consumer.builder()
+                .member(currentMember)
+                .market(market)
+                .build());
 
         return market.getId();
-
     }
 }

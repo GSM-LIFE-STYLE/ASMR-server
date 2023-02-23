@@ -4,6 +4,7 @@ import lifestyle.awardscore.domain.auth.exception.PasswordMismatchException;
 import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.exception.AlreadyRegisterMarketException;
 import lifestyle.awardscore.domain.consumer.exception.UnqualifiedMarketMemberException;
+import lifestyle.awardscore.domain.market.exception.UnqualifiedMarketOwnerException;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.member.exception.MemberNotFoundException;
 import lifestyle.awardscore.domain.member.repository.MemberRepository;
@@ -45,6 +46,11 @@ public class MemberFacade {
 
     public boolean verifyMemberIsTeacher(Member member){
         return member.getRole() == Role.TEACHER;
+    }
+
+    public void verifyTeacher(Member member){
+        if(!verifyMemberIsTeacher(member))
+            throw new UnqualifiedMarketOwnerException("선생님이 아닌 회원은 마켓 오너가 될 수 없습니다.");
     }
 
     public void verifyMemberQualification(Member member){
