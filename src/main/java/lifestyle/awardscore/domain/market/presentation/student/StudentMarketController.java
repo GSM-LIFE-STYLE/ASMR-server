@@ -4,12 +4,10 @@ import lifestyle.awardscore.domain.item.presentation.dto.response.ItemResponse;
 import lifestyle.awardscore.domain.market.presentation.dto.response.MarketResponse;
 import lifestyle.awardscore.domain.market.service.LookUpAllMarketService;
 import lifestyle.awardscore.domain.market.service.LookUpMarketService;
+import lifestyle.awardscore.domain.market.service.RegisterMarketService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,6 +18,7 @@ public class StudentMarketController {
 
     private final LookUpAllMarketService lookUpAllMarketService;
     private final LookUpMarketService lookUpMarketService;
+    private final RegisterMarketService registerMarketService;
 
     @GetMapping
     public ResponseEntity<List<MarketResponse>> lookUpAllMarket(){
@@ -31,6 +30,12 @@ public class StudentMarketController {
     public ResponseEntity<List<ItemResponse>> lookUpMarket(@PathVariable Long marketId){
         List<ItemResponse> responses = lookUpMarketService.execute(marketId);
         return ResponseEntity.ok(responses);
+    }
+
+    @PatchMapping("/{marketId}")
+    public ResponseEntity<Void> registerMarket(@PathVariable Long marketId){
+        registerMarketService.execute(marketId);
+        return ResponseEntity.noContent().build();
     }
 
 }
