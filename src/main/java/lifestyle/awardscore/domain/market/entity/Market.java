@@ -21,10 +21,6 @@ public class Market {
     @Column(name = "market_id", nullable = false)
     private Long id;
 
-    @OneToOne
-    @JoinColumn(name = "member_id")
-    private Member member;
-
     @Column(name = "market_name")
     private String marketName;
 

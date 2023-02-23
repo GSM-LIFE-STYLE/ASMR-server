@@ -11,6 +11,8 @@ import java.util.Optional;
 
 public interface ConsumerRepository extends JpaRepository<Consumer, Long> {
     boolean existsByMember(Member member);
+    boolean existsByMemberAndMarket(Member member, Market market);
+    Optional<Consumer> findByMemberAndMarket(Member member, Market market);
     void deleteAllByMarket(Market market);
     Optional<Consumer> findByMember(Member member);
     void deleteByMemberAndMarket(Member member, Market market);

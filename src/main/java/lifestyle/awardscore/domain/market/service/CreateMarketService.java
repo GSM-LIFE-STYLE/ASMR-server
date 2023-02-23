@@ -33,7 +33,6 @@ public class CreateMarketService {
         memberFacade.verifyTeacher(currentMember);
 
         Market market = marketFacade.saveMarket(Market.builder()
-                .member(currentMember)
                 .marketName(request.getMarketName())
                 .build());
 

@@ -47,4 +47,6 @@ public class ConsumerFacade {
     public void deleteByMarketAndMember(Member member, Market market){
         consumerRepository.deleteByMemberAndMarket(member, market);
     }
+
+
 }
