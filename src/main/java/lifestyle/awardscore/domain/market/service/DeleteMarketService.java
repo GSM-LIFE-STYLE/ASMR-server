@@ -7,6 +7,7 @@ import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.facade.MarketFacade;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.member.facade.MemberFacade;
+import lifestyle.awardscore.domain.owner.facade.OwnerFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +22,7 @@ public class DeleteMarketService {
     private final MemberFacade memberFacade;
     private final ItemFacade itemFacade;
     private final ConsumerFacade consumerFacade;
+    private final OwnerFacade ownerFacade;
 
     @Transactional(rollbackFor = Exception.class)
     public void execute(Long marketId){
@@ -29,7 +31,9 @@ public class DeleteMarketService {
         List<Item> items = itemFacade.findAllItemByMarket(market);
 
         marketFacade.verifyMemberIsMarketOwner(currentMember);
+
         consumerFacade.deleteAllByMarket(market);
+        ownerFacade.deleteByMarket(market);
         marketFacade.deleteMarket(market);
         itemFacade.deleteAllItems(items);
     }
