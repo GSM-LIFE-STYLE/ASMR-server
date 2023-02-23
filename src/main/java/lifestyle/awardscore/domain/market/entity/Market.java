@@ -34,4 +34,8 @@ public class Market {
     public void updateMarketName(String marketName){
         this.marketName = marketName;
     }
+
+    public void addMember(Member member) {
+        members.add(member);
+    }
 }

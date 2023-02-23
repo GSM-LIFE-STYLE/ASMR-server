@@ -42,6 +42,4 @@ public class MemberFacade {
         return member.getRole() == Role.TEACHER;
     }
 
-
-
 }
