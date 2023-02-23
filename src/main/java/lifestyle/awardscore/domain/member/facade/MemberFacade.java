@@ -1,6 +1,7 @@
 package lifestyle.awardscore.domain.member.facade;
 
 import lifestyle.awardscore.domain.auth.exception.PasswordMismatchException;
+import lifestyle.awardscore.domain.consumer.repository.ConsumerRepository;
 import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.exception.AlreadyRegisterMarketException;
 import lifestyle.awardscore.domain.consumer.exception.UnqualifiedMarketMemberException;
@@ -22,6 +23,7 @@ public class MemberFacade {
 
     private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
+    private final ConsumerRepository consumerRepository;
 
     public Member getCurrentMember() {
         String email = SecurityContextHolder.getContext().getAuthentication().getName();
@@ -38,6 +40,11 @@ public class MemberFacade {
     public Member getMemberByEmail(String email) {
         return memberRepository.findByEmail(email)
                 .orElseThrow(() -> new MemberNotFoundException("멤버를 찾을 수 없습니다."));
+    }
+
+    public Member findById(Long memberId){
+        return memberRepository.findById(memberId)
+                .orElseThrow(() -> new MemberNotFoundException("존재하지 않는 회원"));
     }
 
     public Long getMemberId() {
@@ -59,8 +66,7 @@ public class MemberFacade {
     }
 
     public void verifyMemberAlreadyRegisteredMarket(Member member){
-        Market market = member.getMarket();
-        if(!Objects.isNull(market))
+        if(consumerRepository.existsByMember(member))
             throw new AlreadyRegisterMarketException("이미 상점 마켓에 가입된 사용자입니다.");
     }
 

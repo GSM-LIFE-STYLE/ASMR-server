@@ -9,6 +9,7 @@ import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.facade.MarketFacade;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.member.facade.MemberFacade;
+import lifestyle.awardscore.domain.owner.facade.OwnerFacade;
 import lifestyle.awardscore.infrastructure.s3.service.S3Service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,16 +23,10 @@ public class CreateItemService {
     private final ItemFacade itemFacade;
     private final MemberFacade memberFacade;
     private final MarketFacade marketFacade;
+    private final OwnerFacade ownerFacade;
     private final S3Service s3Service;
 
-    private void verifyMemberAndMarket(Member currentMember, Market market){
-        if(!memberFacade.verifyMemberIsTeacher(currentMember))
-            throw new ForbiddenAccessItemException("아이템의 정보에 접근할 수 있는 권한이 없습니다.");
 
-        if(!marketFacade.verifyMemberIsMarketOwner(market.getMember()))
-            throw new ForbiddenAccessItemException("아이템의 정보에 접근할 수 있는 권한이 없습니다.");
-
-    }
 
     private ItemImage saveToUrl(Item item, String title, String uploadFileUrl) {
         return ItemImage.builder()
@@ -45,7 +40,7 @@ public class CreateItemService {
         Member currentMember = memberFacade.getCurrentMember();
         Market findMarket = marketFacade.findMarketEntityById(marketId);
 
-        verifyMemberAndMarket(currentMember,findMarket);
+        itemFacade.verifyMemberAndMarket(currentMember,findMarket);
 
         Item item = Item.builder()
                 .title(request.getTitle())

@@ -1,6 +1,5 @@
 package lifestyle.awardscore.domain.market.service;
 
-import lifestyle.awardscore.domain.item.facade.ItemFacade;
 import lifestyle.awardscore.domain.market.facade.MarketFacade;
 import lifestyle.awardscore.domain.market.presentation.dto.response.MarketResponse;
 import lombok.RequiredArgsConstructor;
@@ -14,8 +13,6 @@ public class LookUpAllMarketService {
     private final MarketFacade marketFacade;
 
     public List<MarketResponse> execute(){
-        List<MarketResponse> responses = marketFacade
-                .marketToDtoList(marketFacade.findAllMarkets());
-        return responses;
+        return marketFacade.marketToDtoList(marketFacade.findAllMarkets());
     }
 }

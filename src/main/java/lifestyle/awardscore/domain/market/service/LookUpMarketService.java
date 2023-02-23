@@ -16,7 +16,6 @@ public class LookUpMarketService {
     private final MarketFacade marketFacade;
     private final ItemFacade itemFacade;
 
-
     public List<ItemResponse> execute(Long marketId){
         Market market = marketFacade.findMarketEntityById(marketId);
         List<Item> items = itemFacade.findAllItemByMarket(market);

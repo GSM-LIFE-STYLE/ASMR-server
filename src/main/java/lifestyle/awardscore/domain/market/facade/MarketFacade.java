@@ -6,6 +6,8 @@ import lifestyle.awardscore.domain.market.presentation.dto.response.MarketRespon
 import lifestyle.awardscore.domain.market.repository.MarketRepository;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.member.facade.MemberFacade;
+import lifestyle.awardscore.domain.owner.entity.Owner;
+import lifestyle.awardscore.domain.owner.facade.OwnerFacade;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.autoconfigure.freemarker.FreeMarkerTemplateAvailabilityProvider;
 import org.springframework.stereotype.Component;
@@ -19,10 +21,8 @@ public class MarketFacade {
 
     private final MarketRepository marketRepository;
     private final MemberFacade memberFacade;
+    private final OwnerFacade ownerFacade;
 
-    public Market getCurrentMarket(){
-        return memberFacade.getCurrentMember().getMarket();
-    }
 
     public Market findMarketEntityById(Long id){
         return marketRepository.findById(id)
@@ -46,7 +46,7 @@ public class MarketFacade {
         return MarketResponse.builder()
                 .marketId(market.getId())
                 .marketName(market.getMarketName())
-                .marketOwnerName(market.getMember().getName())
+                .marketOwnerName(ownerFacade.findByMarket(market).getMember().getName())
                 .build();
     }
 
@@ -57,4 +57,6 @@ public class MarketFacade {
     public Market saveMarket(Market market){
         return marketRepository.save(market);
     }
+
+
 }

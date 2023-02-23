@@ -1,8 +1,7 @@
-package lifestyle.awardscore.domain.market.service;
+package lifestyle.awardscore.domain.owner.service;
 
+import lifestyle.awardscore.domain.consumer.entity.Consumer;
 import lifestyle.awardscore.domain.consumer.facade.ConsumerFacade;
-import lifestyle.awardscore.domain.item.entity.Item;
-import lifestyle.awardscore.domain.item.facade.ItemFacade;
 import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.facade.MarketFacade;
 import lifestyle.awardscore.domain.member.entity.Member;
@@ -12,30 +11,25 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
-public class DeleteMarketService {
-
-    private final MarketFacade marketFacade;
+public class WithdrawMarketMemberService {
     private final MemberFacade memberFacade;
-    private final ItemFacade itemFacade;
+    private final MarketFacade marketFacade;
     private final ConsumerFacade consumerFacade;
     private final OwnerFacade ownerFacade;
 
     @Transactional(rollbackFor = Exception.class)
-    public void execute(Long marketId){
+    public void execute(Long memberId, Long marketId){
         Member currentMember = memberFacade.getCurrentMember();
         Market market = marketFacade.findMarketEntityById(marketId);
-        List<Item> items = itemFacade.findAllItemByMarket(market);
+        Member withdrawMember = memberFacade.findById(memberId);
+        Consumer consumer = consumerFacade.findByMember(withdrawMember);
 
-        marketFacade.verifyMemberIsMarketOwner(currentMember);
+        memberFacade.verifyTeacher(currentMember);
+        marketFacade.verifyMemberIsMarketOwner(ownerFacade.findByMarket(market).getMember());
+        consumerFacade.verifyMarketConsumer(consumer, market);
 
-        consumerFacade.deleteAllByMarket(market);
-        ownerFacade.deleteByMarket(market);
-        marketFacade.deleteMarket(market);
-        itemFacade.deleteAllItems(items);
+        consumerFacade.deleteByMarketAndMember(withdrawMember, market);
     }
-
 }

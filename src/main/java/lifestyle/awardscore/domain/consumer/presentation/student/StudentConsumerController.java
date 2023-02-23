@@ -14,14 +14,14 @@ public class StudentConsumerController {
     private final RegisterMarketService registerMarketService;
     private final ExitMarketService exitMarketService;
 
-    @PatchMapping("/{marketId}/register")
-    public ResponseEntity<Void> registerMarket(@PathVariable Long marketId){
+    @PostMapping("/register")
+    public ResponseEntity<Void> registerMarket(@RequestParam Long marketId){
         registerMarketService.execute(marketId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok().build();
     }
 
-    @DeleteMapping("/{marketId}/exit")
-    public ResponseEntity<Void> exitMarket(@PathVariable Long marketId){
+    @DeleteMapping("/exit")
+    public ResponseEntity<Void> exitMarket(@RequestParam Long marketId){
         exitMarketService.execute(marketId);
         return ResponseEntity.ok().build();
     }

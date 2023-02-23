@@ -1,8 +1,7 @@
-package lifestyle.awardscore.domain.market.service;
+package lifestyle.awardscore.domain.owner.service;
 
+import lifestyle.awardscore.domain.consumer.entity.Consumer;
 import lifestyle.awardscore.domain.consumer.facade.ConsumerFacade;
-import lifestyle.awardscore.domain.item.entity.Item;
-import lifestyle.awardscore.domain.item.facade.ItemFacade;
 import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.facade.MarketFacade;
 import lifestyle.awardscore.domain.member.entity.Member;
@@ -12,30 +11,31 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
-public class DeleteMarketService {
+public class InviteMarketMemberService {
 
-    private final MarketFacade marketFacade;
-    private final MemberFacade memberFacade;
-    private final ItemFacade itemFacade;
-    private final ConsumerFacade consumerFacade;
     private final OwnerFacade ownerFacade;
+    private final MemberFacade memberFacade;
+    private final MarketFacade marketFacade;
+    private final ConsumerFacade consumerFacade;
 
     @Transactional(rollbackFor = Exception.class)
-    public void execute(Long marketId){
+    public Long execute(Long marketId, Long memberId){
         Member currentMember = memberFacade.getCurrentMember();
         Market market = marketFacade.findMarketEntityById(marketId);
-        List<Item> items = itemFacade.findAllItemByMarket(market);
+        Member invitedMember = memberFacade.findById(memberId);
 
-        marketFacade.verifyMemberIsMarketOwner(currentMember);
+        memberFacade.verifyTeacher(currentMember);
+        marketFacade.verifyMemberIsMarketOwner(ownerFacade.findByMarket(market).getMember());
+        memberFacade.verifyMemberAlreadyRegisteredMarket(invitedMember);
 
-        consumerFacade.deleteAllByMarket(market);
-        ownerFacade.deleteByMarket(market);
-        marketFacade.deleteMarket(market);
-        itemFacade.deleteAllItems(items);
+        Consumer consumer = consumerFacade.saveConsumer(Consumer.builder()
+                .member(invitedMember)
+                .market(market)
+                .build());
+
+        return consumer.getId();
     }
 
 }
