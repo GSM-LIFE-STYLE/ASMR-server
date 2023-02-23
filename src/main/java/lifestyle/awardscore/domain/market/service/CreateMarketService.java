@@ -1,5 +1,6 @@
 package lifestyle.awardscore.domain.market.service;
 
+import lifestyle.awardscore.domain.consumer.entity.Consumer;
 import lifestyle.awardscore.domain.consumer.facade.ConsumerFacade;
 import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.exception.AlreadyMarketOwnerException;
@@ -34,7 +35,11 @@ public class CreateMarketService {
                 .marketName(request.getMarketName())
                 .build());
 
-        return market.getId();
+        consumerFacade.saveConsumer(Consumer.builder()
+                .member(currentMember)
+                .market(market)
+                .build());
 
+        return market.getId();
     }
 }

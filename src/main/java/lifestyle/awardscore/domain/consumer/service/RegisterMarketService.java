@@ -1,5 +1,7 @@
 package lifestyle.awardscore.domain.consumer.service;
 
+import lifestyle.awardscore.domain.consumer.entity.Consumer;
+import lifestyle.awardscore.domain.consumer.facade.ConsumerFacade;
 import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.facade.MarketFacade;
 import lifestyle.awardscore.domain.member.entity.Member;
@@ -14,6 +16,7 @@ public class RegisterMarketService {
 
     private final MemberFacade memberFacade;
     private final MarketFacade marketFacade;
+    private final ConsumerFacade consumerFacade;
 
     @Transactional(rollbackFor = Exception.class)
     public Long execute(Long marketId){
@@ -22,7 +25,12 @@ public class RegisterMarketService {
 
         memberFacade.verifyMemberQualification(member);
         memberFacade.verifyMemberAlreadyRegisteredMarket(member);
-        return market.getId();
+        Consumer consumer = consumerFacade.saveConsumer(Consumer.builder()
+                .member(member)
+                .market(market)
+                .build());
+
+        return consumer.getId();
     }
 
 }
