@@ -1,4 +1,4 @@
-package lifestyle.awardscore.domain.market.exception;
+package lifestyle.awardscore.domain.consumer.exception;
 
 import lifestyle.awardscore.global.error.ErrorCode;
 import lombok.Getter;

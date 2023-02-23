@@ -3,7 +3,7 @@ package lifestyle.awardscore.domain.member.facade;
 import lifestyle.awardscore.domain.auth.exception.PasswordMismatchException;
 import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.exception.AlreadyRegisterMarketException;
-import lifestyle.awardscore.domain.market.exception.UnqualifiedMarketMemberException;
+import lifestyle.awardscore.domain.consumer.exception.UnqualifiedMarketMemberException;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.member.exception.MemberNotFoundException;
 import lifestyle.awardscore.domain.member.repository.MemberRepository;

@@ -1,4 +1,4 @@
-package lifestyle.awardscore.domain.market.service;
+package lifestyle.awardscore.domain.consumer.service;
 
 import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.facade.MarketFacade;
