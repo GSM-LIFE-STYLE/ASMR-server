@@ -13,6 +13,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.Objects;
+
 @Component
 @RequiredArgsConstructor
 public class MemberFacade {
@@ -52,7 +54,7 @@ public class MemberFacade {
 
     public void verifyMemberAlreadyRegisteredMarket(Member member){
         Market market = member.getMarket();
-        if(market == null)
+        if(!Objects.isNull(market))
             throw new AlreadyRegisterMarketException("이미 상점 마켓에 가입된 사용자입니다.");
     }
 

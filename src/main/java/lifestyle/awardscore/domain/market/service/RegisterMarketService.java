@@ -21,11 +21,10 @@ public class RegisterMarketService {
         Market market = marketFacade.findMarketEntityById(marketId);
 
         memberFacade.verifyMemberQualification(member);
+        memberFacade.verifyMemberAlreadyRegisteredMarket(member);
 
-
-        market.addMember(member);
         member.updateMarket(market);
 
-        return null;
+        return market.getId();
     }
 }
