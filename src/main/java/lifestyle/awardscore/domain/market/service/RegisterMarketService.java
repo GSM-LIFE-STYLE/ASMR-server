@@ -1,7 +1,6 @@
 package lifestyle.awardscore.domain.market.service;
 
 import lifestyle.awardscore.domain.market.entity.Market;
-import lifestyle.awardscore.domain.market.exception.UnqualifiedMarketMemberException;
 import lifestyle.awardscore.domain.market.facade.MarketFacade;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.member.facade.MemberFacade;
@@ -11,16 +10,22 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class SignUpMarketService {
+public class RegisterMarketService {
 
     private final MemberFacade memberFacade;
     private final MarketFacade marketFacade;
 
     @Transactional(rollbackFor = Exception.class)
-    public void execute(Long marketId){
-        Member currentMember = memberFacade.getCurrentMember();
-        memberFacade.verifyMemberQualification(currentMember);
+    public Long execute(Long marketId){
+        Member member = memberFacade.getCurrentMember();
         Market market = marketFacade.findMarketEntityById(marketId);
-        market.addMember(currentMember);
+
+        memberFacade.verifyMemberQualification(member);
+
+
+        market.addMember(member);
+        member.updateMarket(market);
+
+        return null;
     }
 }
