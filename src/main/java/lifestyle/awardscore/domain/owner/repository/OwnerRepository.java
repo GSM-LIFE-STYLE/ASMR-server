@@ -11,4 +11,5 @@ public interface OwnerRepository extends JpaRepository<Owner, Long> {
     boolean existsByMember(Member member);
     void deleteAllByMemberAndMarket(Member member, Market market);
     void deleteAllByMarket(Market market);
+    Optional<Owner> findByMarket(Market market);
 }

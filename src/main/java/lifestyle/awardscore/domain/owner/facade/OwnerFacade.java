@@ -4,6 +4,7 @@ import lifestyle.awardscore.domain.market.entity.Market;
 import lifestyle.awardscore.domain.market.exception.AlreadyMarketOwnerException;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.owner.entity.Owner;
+import lifestyle.awardscore.domain.owner.exception.NotFoundOwnerException;
 import lifestyle.awardscore.domain.owner.repository.OwnerRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,6 +16,11 @@ public class OwnerFacade {
 
     public Owner saveOwner(Owner owner){
         return ownerRepository.save(owner);
+    }
+
+    public Owner findByMarket(Market market){
+        return ownerRepository.findByMarket(market)
+                .orElseThrow(() -> new NotFoundOwnerException("존재하지 않는 오너"));
     }
 
     public void existsByMember(Member member){

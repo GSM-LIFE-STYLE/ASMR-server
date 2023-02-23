@@ -28,6 +28,7 @@ public enum ErrorCode {
     UNQUALIFIED_MARKET_MEMBER("선생님은 상점마켓 소비자가 될 수 없습니다.",403),
     ALREADY_REGISTER_MEMBER("이미 상점마켓에 가입된 멤버입니다.",403),
     NOT_FOUND_CONSUMER("존재하지 않는 소비자입니다.", 404),
+    NOT_FOUND_OWNER("존재하지 않는 오너",404),
     NOT_FOUND_NOTICE("공지가 존재하지 않습니다.", 404);
 
     private final String message;
