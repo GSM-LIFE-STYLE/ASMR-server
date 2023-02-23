@@ -10,6 +10,8 @@ import lifestyle.awardscore.domain.market.presentation.dto.request.CreateMarketR
 import lifestyle.awardscore.domain.market.repository.MarketRepository;
 import lifestyle.awardscore.domain.member.entity.Member;
 import lifestyle.awardscore.domain.member.facade.MemberFacade;
+import lifestyle.awardscore.domain.owner.entity.Owner;
+import lifestyle.awardscore.domain.owner.facade.OwnerFacade;
 import lifestyle.awardscore.global.filter.role.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,14 +22,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class CreateMarketService {
     private final MemberFacade memberFacade;
     private final MarketFacade marketFacade;
-    private final ConsumerFacade consumerFacade;
+    private final OwnerFacade ownerFacade;
 
 
     @Transactional
     public Long execute(CreateMarketRequest request){
         Member currentMember = memberFacade.getCurrentMember();
 
-        consumerFacade.existsByMember(currentMember);
+        ownerFacade.existsByMember(currentMember);
         memberFacade.verifyTeacher(currentMember);
 
         Market market = marketFacade.saveMarket(Market.builder()
@@ -35,7 +37,7 @@ public class CreateMarketService {
                 .marketName(request.getMarketName())
                 .build());
 
-        consumerFacade.saveConsumer(Consumer.builder()
+        ownerFacade.saveOwner(Owner.builder()
                 .member(currentMember)
                 .market(market)
                 .build());
