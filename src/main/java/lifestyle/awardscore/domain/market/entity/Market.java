@@ -25,13 +25,11 @@ public class Market {
     @JoinColumn(name = "member_id")
     private Member member;
 
-    @OneToMany(mappedBy = "market", fetch = FetchType.LAZY)
-    private List<Member> members;
-
     @Column(name = "market_name")
     private String marketName;
 
     public void updateMarketName(String marketName){
         this.marketName = marketName;
     }
+
 }
