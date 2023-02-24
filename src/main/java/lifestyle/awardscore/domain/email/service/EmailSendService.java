@@ -25,6 +25,11 @@ public class EmailSendService {
     private final EmailAuthRepository emailAuthRepository;
     private final JavaMailSender mailSender;
 
+    /**
+     * 랜덤한 인증번호를 발급해 발송 메서드에 인자를 전달하는 서비스 로직
+     * @param emailSentDto email
+     * @author 김희망
+     */
     @Async
     @Transactional(rollbackFor = Exception.class)
     public void execute(EmailSendRequest emailSentDto){
@@ -35,6 +40,12 @@ public class EmailSendService {
         sendAuthEmail(emailSentDto.getEmail(),authKey);
     }
 
+    /**
+     * 이메일로 인증번호를 발송하는 서비스 로직
+     * @param email
+     * @param authKey
+     * @author 김희망
+     */
     private void sendAuthEmail(String email, String authKey) {
         String subject = "ASMR 인증번호";
         String text = "인증을 위한 인증번호는 <strong>" + authKey + "<strong /> 입니다. <br />";

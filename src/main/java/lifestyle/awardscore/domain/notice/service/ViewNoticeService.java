@@ -17,6 +17,11 @@ public class ViewNoticeService {
 
     private final NoticeRepository noticeRepository;
 
+    /**
+     * 등록된 공지사항 전체를 조회하는 서비스 로직
+     * @return notices
+     * @author 박주홍
+     */
     public List<ViewNoticeResponse> execute() {
         List<Notice> noticeList = noticeRepository.findAll();
         return noticeList.stream()

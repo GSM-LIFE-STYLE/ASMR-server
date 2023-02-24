@@ -23,6 +23,12 @@ public class MemberLogoutService {
     private final MemberFacade memberFacade;
     private final RefreshTokenRepository refreshTokenRepository;
 
+    /**
+     * 이메일과 엑세스 토큰을 받아 블랙리스트에 등록하는 서비스 로직
+     * @param email
+     * @param accessToken
+     * @author 박주홍
+     */
     private void saveBlackList(String email, String accessToken) {
 
         if(blackListRepository.existsById(accessToken))
@@ -38,6 +44,11 @@ public class MemberLogoutService {
         blackListRepository.save(blackList);
     }
 
+    /**
+     * 엑세스토큰을 받아 로그아웃 처리하는 서비스 로직
+     * @param accessToken
+     * @author 박주홍
+     */
     @Transactional
     public void logout(String accessToken) {
         Member member = memberFacade.getCurrentMember();

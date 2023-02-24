@@ -19,6 +19,12 @@ public class WithdrawMarketMemberService {
     private final ConsumerFacade consumerFacade;
     private final OwnerFacade ownerFacade;
 
+    /**
+     * 자신의 상점마켓에 등록된 멤버를 강제로 탈퇴시키는 서비스 로직
+     * @param memberId
+     * @param marketId
+     * @author 김희망
+     */
     @Transactional(rollbackFor = Exception.class)
     public void execute(Long memberId, Long marketId){
         Member currentMember = memberFacade.getCurrentMember();

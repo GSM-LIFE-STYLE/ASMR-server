@@ -23,6 +23,11 @@ public class MemberLoginService {
     private final RefreshTokenRepository refreshTokenRepository;
     private final JwtProperties jwtProperties;
 
+    /**
+     * 이메일과 비밀번호를 받아 로그인 처리하고 엑세스 토큰과 리프레시토큰을 발급하는 서비스
+     * @param loginRequest
+     * @author 박주홍
+     */
     @Transactional(rollbackFor = Exception.class)
     public TokenResponse login(MemberLoginRequest loginRequest) {
         Member member = memberFacade.getMemberByEmail(loginRequest.getEmail());

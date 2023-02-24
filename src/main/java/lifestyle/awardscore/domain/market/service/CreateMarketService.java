@@ -24,6 +24,12 @@ public class CreateMarketService {
     private final MarketFacade marketFacade;
     private final OwnerFacade ownerFacade;
 
+    /**
+     * 선생님이 상점마켓을 새로 개설하는 서비스 로직
+     * @param request marketName
+     * @return marketId
+     * @author 김희망
+     */
 
     @Transactional
     public Long execute(CreateMarketRequest request){

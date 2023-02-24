@@ -23,6 +23,11 @@ public class ChangePasswordService {
     private final MemberFacade memberFacade;
 
 
+    /**
+     * 인증된 이메일인지 검증하는 서비스 로직
+     * @param email
+     * @author 박주홍
+     */
     private void validateAuth(String email) {
         EmailAuth emailAuth = emailAuthRepository.findById(email)
                 .orElseThrow(() -> new NotVerifyEmailException("검증되지 않은 이메일입니다."));
@@ -30,6 +35,12 @@ public class ChangePasswordService {
             throw new NotVerifyEmailException("검증되지 않은 이메일입니다.");
         }
     }
+
+    /**
+     * 멤버의 비밀번호를 변경하는 서비스 로직
+     * @param changePasswordRequest
+     * @author 박주홍
+     */
 
     @Transactional
     public void changePassword(ChangePasswordRequest changePasswordRequest) {

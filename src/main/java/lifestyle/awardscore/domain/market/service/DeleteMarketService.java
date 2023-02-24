@@ -24,6 +24,11 @@ public class DeleteMarketService {
     private final ConsumerFacade consumerFacade;
     private final OwnerFacade ownerFacade;
 
+    /**
+     * 자신이 등록한 상점마켓을 삭제하는 서비스 로직
+     * @param marketId
+     * @author 김희망
+     */
     @Transactional(rollbackFor = Exception.class)
     public void execute(Long marketId){
         Member currentMember = memberFacade.getCurrentMember();
