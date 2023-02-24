@@ -27,13 +27,29 @@ public class CreateItemService {
     private final S3Service s3Service;
 
 
-
+    /**
+     * 아이템 이미지와 s3에 사진을 저장하는 로직
+     * @param item
+     * @param title
+     * @param uploadFileUrl
+     * @return ItemImage
+     * @author 김희망
+     */
     private ItemImage saveToUrl(Item item, String title, String uploadFileUrl) {
         return ItemImage.builder()
                 .item(item)
                 .previewUrl("https://awardscore.s3.ap-northeast-2.amazonaws.com/MARKET/"+ title + "/" + uploadFileUrl)
                 .build();
     }
+
+    /**
+     * 아이템을 마켓에 등록하는 비즈니스 로직
+     * @param marketId
+     * @param request
+     * @param multipartFile
+     * @return itemId
+     * @author 김희망
+     */
 
     @Transactional(rollbackFor = Exception.class)
     public Long execute(Long marketId, CreateItemRequest request, MultipartFile multipartFile){

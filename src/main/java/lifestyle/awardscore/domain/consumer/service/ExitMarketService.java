@@ -17,6 +17,11 @@ public class ExitMarketService {
     private final MemberFacade memberFacade;
     private final ConsumerFacade consumerFacade;
 
+    /**
+     * 유저가 가입되어있는 마켓을 나가는 서비스 로직
+     * @param marketId
+     * @author 김희망
+     */
     @Transactional(rollbackFor = Exception.class)
     public void execute(Long marketId){
         Member currentMember = memberFacade.getCurrentMember();

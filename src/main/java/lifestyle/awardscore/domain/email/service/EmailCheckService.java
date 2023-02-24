@@ -18,6 +18,12 @@ public class EmailCheckService {
     private final EmailAuthRepository emailAuthRepository;
     private final EmailFacade emailFacade;
 
+    /**
+     * 이메일 인증키와 입력한 인증키가 일치하는지 검증하는 서비스 로직
+     * @param email
+     * @param authKey
+     * @authro 김희망
+     */
     @Transactional(rollbackFor = Exception.class)
     public void execute(String email , String authKey) {
         EmailAuth emailAuthEntity = emailFacade.getEmailEntityById(email);

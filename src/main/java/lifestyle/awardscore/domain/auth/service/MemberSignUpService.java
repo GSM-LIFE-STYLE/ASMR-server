@@ -20,6 +20,11 @@ public class MemberSignUpService {
     private final MemberRepository memberRepository;
     private final EmailFacade emailFacade;
 
+    /**
+     * 회원가입하는 서비스 로직
+     * @param signUpRequest email, password, name, number, role
+     * @author 박주홍
+     */
     @Transactional(rollbackFor = Exception.class)
     public void execute(MemberSignUpRequest signUpRequest) {
 

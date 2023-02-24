@@ -25,6 +25,11 @@ public class EmailSendService {
     private final EmailAuthRepository emailAuthRepository;
     private final JavaMailSender mailSender;
 
+    /**
+     * 이메일로 인증번호를 발송하는 서비스 로직
+     * @param emailSentDto email
+     * @author 김희망
+     */
     @Async
     @Transactional(rollbackFor = Exception.class)
     public void execute(EmailSendRequest emailSentDto){
