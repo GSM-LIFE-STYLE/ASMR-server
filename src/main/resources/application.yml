@@ -57,8 +57,8 @@ logging:
   level:
     com:
       amazonaws:
-        internal:
+       internal:
           InstanceMetadataServiceResourceFetcher: error
-        util:
+       util:
           EC2MetadataUtils: error
     com.project.findme.infrastructure.feign: debug
