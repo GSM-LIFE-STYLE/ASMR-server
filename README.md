@@ -1,6 +1,6 @@
 # ASMR 
 
-Award Score Management Run
+Award Score ManageR
 
 ### Getting Start
 
