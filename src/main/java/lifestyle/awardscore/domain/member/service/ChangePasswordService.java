@@ -31,6 +31,12 @@ public class ChangePasswordService {
         }
     }
 
+    /**
+     * 멤버의 비밀번호를 변경하는 서비스 로직
+     * @param changePasswordRequest
+     * @author 박주홍
+     */
+
     @Transactional
     public void changePassword(ChangePasswordRequest changePasswordRequest) {
         Member member = memberFacade.getCurrentMember();

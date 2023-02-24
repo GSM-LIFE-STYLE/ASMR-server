@@ -20,6 +20,13 @@ public class InviteMarketMemberService {
     private final MarketFacade marketFacade;
     private final ConsumerFacade consumerFacade;
 
+    /**
+     * 학생들을 자신의 상점마켓에 초대하는 서비스 로직
+     * @param marketId
+     * @param memberId
+     * @return consumerId
+     * @author 김희망
+     */
     @Transactional(rollbackFor = Exception.class)
     public Long execute(Long marketId, Long memberId){
         Member currentMember = memberFacade.getCurrentMember();

@@ -25,6 +25,11 @@ public class WriteNoticeService {
         }
     }
 
+    /**
+     * 어드민, 선생님이 직접 공지사항을 작성하는 서비스 로직
+     * @param request (title, content)
+     * @author 박주홍
+     */
     @Transactional
     public void execute(WriteNoticeRequest request) {
 

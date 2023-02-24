@@ -18,6 +18,11 @@ public class WithdrawService {
     private final MemberRepository memberRepository;
     private final RefreshTokenRepository refreshTokenRepository;
 
+    /**
+     * 회원탈퇴 기능의 서비스 로직
+     * @param password
+     * @author 김희망
+     */
     @Transactional
     public void execute(String password) {
         Member member = memberFacade.getCurrentMember();
