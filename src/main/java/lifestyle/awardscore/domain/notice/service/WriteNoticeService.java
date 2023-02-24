@@ -19,6 +19,11 @@ public class WriteNoticeService {
     private final MemberFacade memberFacade;
 
 
+    /**
+     * 멤버의 공지사항 접근 권한을 확인하는 서비스 로직
+     * @param member
+     * @author 박주홍
+     */
     private void verifyMember(Member member) {
         if (member.getRole() == Role.STUDENT) {
             throw new UnqualifiedNoticeWriterException("공지글을 작성할 권한이 없습니다.");
